@@ -1,5 +1,7 @@
 {
   "name": "roclaApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

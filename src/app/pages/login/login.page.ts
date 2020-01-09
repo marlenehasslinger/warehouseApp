@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +14,10 @@ export class LoginPage implements OnInit {
   employee = {
     pin: ""
   };
+  employeeId = null;
+  scannedCode = null;
 
-  constructor(public formBuilder: FormBuilder) {
+  constructor(public formBuilder: FormBuilder, public barcodeScanner: BarcodeScanner, private router: Router) {
     this.myForm = this.formBuilder.group({
       pin: ['', Validators.required],
       });
@@ -25,6 +29,17 @@ export class LoginPage implements OnInit {
 
   login(){
     this.buttonPressed = true;
+    this.employeeId = this.myForm.value.pin;
+    this.scanCode();
+  }
+
+  scanCode() {
+    this.barcodeScanner.scan().then(
+      barcodeData => {
+        this.scannedCode = barcodeData.text;
+        this.router.navigateByUrl("precheck");
+      }
+    );
   }
 
   ngOnInit() {

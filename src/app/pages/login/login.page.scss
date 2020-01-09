@@ -2,14 +2,22 @@ ion-header {
     text-align: center;
 }
 
+ion-content{
+    --background: #202020;
+}
+
 ion-card {
-    text-align: center;
-    width: 60%;
-    height: 40%;
+   // text-align: center;
+    width: 70%;
+    height: 400px;
     margin-top: 20%;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 15%;
+    margin-right: 15%;
     background-color: #f7f7f7;
+}
+
+#pin-input {
+    text-align: left;
 }
 
 ion-card-content{
@@ -21,10 +29,9 @@ ion-input {
     height: 20%;
     width: 100%;
     font-size: 30px;
-    text-align: center;
 
 }
 
 #login-button-container {
-    margin-top:35%;
+    margin-top:25%;
 }

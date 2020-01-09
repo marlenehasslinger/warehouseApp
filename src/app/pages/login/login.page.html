@@ -4,25 +4,29 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content overflow-scroll="false">
     <ion-card>
         <ion-card-header>
           <ion-card-title>Login</ion-card-title>
         </ion-card-header>
       
         <ion-card-content>
-          <div>
+          <div id="pin-input">
               <form [formGroup]="myForm">
-                  <ion-input formControlName="pin" required="true" name="pin" placeholder="Enter your PIN code" autofocus="true" clear-input="true" maxlength="5"></ion-input>
+                  <ion-label position="floating">PIN</ion-label>
+                  <ion-input formControlName="pin" required="true" name="pin" placeholder="Please enter your PIN" autofocus="true" clear-input="true" maxlength="5"></ion-input>
               </form>
           </div>
-
+         
+          <!-- <p>Result from scan: {{scannedCode }}</p>
+          <p>Employee id: {{ employeeId }}</p> -->
           <div id="login-button-container">
-            <ion-button (click)="login()" shape="round">Login</ion-button>
+            <ion-button [disabled]="pin.invalid" (click)="login()" shape="round">Log in</ion-button>
             <div class="danger" *ngIf="pin.invalid && buttonPressed">
                 Please enter your PIN.
             </div>
           </div>
+          
           </ion-card-content>
       </ion-card>
 </ion-content>

@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'orders',
     loadChildren: () => import('./pages/orders/orders.module').then( m => m.OrdersPageModule)
   },
+  {
+    path: 'precheck',
+    loadChildren: () => import('./pages/precheck/precheck.module').then( m => m.PrecheckPageModule)
+  },
 ];
 
 @NgModule({
