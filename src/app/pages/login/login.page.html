@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Daisy</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+          <ion-card-title>Login</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+          <div>
+              <form [formGroup]="myForm">
+                  <ion-input formControlName="pin" required="true" name="pin" placeholder="Enter your PIN code" autofocus="true" clear-input="true" maxlength="5"></ion-input>
+              </form>
+          </div>
+
+          <div id="login-button-container">
+            <ion-button (click)="login()" shape="round">Login</ion-button>
+            <div class="danger" *ngIf="pin.invalid && buttonPressed">
+                Please enter your PIN.
+            </div>
+          </div>
+          </ion-card-content>
+      </ion-card>
+</ion-content>
