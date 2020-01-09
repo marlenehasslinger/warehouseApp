@@ -18,8 +18,8 @@
               </form>
           </div>
          
-          <!-- <p>Result from scan: {{scannedCode }}</p>
-          <p>Employee id: {{ employeeId }}</p> -->
+          <p>Result from scan: {{scannedCode }}</p>
+          <p>Employee id: {{ employeeId }}</p>
           <div id="login-button-container">
             <ion-button [disabled]="pin.invalid" (click)="login()" shape="round">Log in</ion-button>
             <div class="danger" *ngIf="pin.invalid && buttonPressed">

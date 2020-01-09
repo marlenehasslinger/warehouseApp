@@ -11,9 +11,6 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
   public myForm: FormGroup;
   buttonPressed:boolean = false;
-  employee = {
-    pin: ""
-  };
   employeeId = null;
   scannedCode = null;
 
@@ -37,7 +34,9 @@ export class LoginPage implements OnInit {
     this.barcodeScanner.scan().then(
       barcodeData => {
         this.scannedCode = barcodeData.text;
-        this.router.navigateByUrl("precheck");
+        if(!barcodeData.cancelled){
+          this.router.navigateByUrl("precheck");
+        }
       }
     );
   }
