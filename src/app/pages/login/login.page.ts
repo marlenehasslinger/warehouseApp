@@ -3,7 +3,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { UserService } from '../../services/user.service';
 import { auth } from 'firebase/app';
+import { userInfo } from 'os';
+
+interface user {
+	pin: string,
+  uid: string,
+  truck: string
+}
 
 @Component({
   selector: 'app-login',
@@ -13,11 +21,16 @@ import { auth } from 'firebase/app';
 export class LoginPage implements OnInit {
   public myForm: FormGroup;
   buttonPressed:boolean = false;
-  employeeId = null;
-  scannedCode = null;
-  pinNotFound = false;
+  employeePin: string = null;
+  scannedCode: string = null;
+  pinNotFound: boolean = false;
+  user: user = {
+    pin: "",
+    uid: "",
+    truck: ""
+  };
 
-  constructor(public afAuth: AngularFireAuth, public formBuilder: FormBuilder, public barcodeScanner: BarcodeScanner, private router: Router) {
+  constructor(public userService: UserService, public afAuth: AngularFireAuth, public formBuilder: FormBuilder, public barcodeScanner: BarcodeScanner, private router: Router) {
     this.myForm = this.formBuilder.group({
       pin: ['', Validators.required],
       });
@@ -29,13 +42,17 @@ export class LoginPage implements OnInit {
 
   async login(){
     this.buttonPressed = true;
-    this.employeeId = this.myForm.value.pin;
+    this.employeePin = this.myForm.value.pin;
 
     try {
       // kind of a hack
-      const res = await this.afAuth.auth.signInWithEmailAndPassword(this.employeeId + "@testemail.com", "123456");
+      let that = this;
+      const res = await this.afAuth.auth.signInWithEmailAndPassword(this.employeePin + "@testemail.com", "123456");
       if(res.user){
         this.pinNotFound = false;
+        console.log(res.user.uid);
+        this.user.uid = res.user.uid;
+        this.user.pin = this.employeePin;
         this.scanCode();
       }
     } catch(err) {
@@ -50,6 +67,8 @@ export class LoginPage implements OnInit {
       barcodeData => {
         this.scannedCode = barcodeData.text;
         if(!barcodeData.cancelled){
+          this.user.truck = this.scannedCode;
+          this.userService.setUser(this.user);
           this.router.navigateByUrl("precheck");
         }
       }

@@ -5,6 +5,8 @@
 </ion-header>
 
 <ion-content overflow-scroll="false">
+
+  <h1>DAISY</h1>
     <ion-card>
         <ion-card-header>
           <ion-card-title>Login</ion-card-title>
@@ -18,8 +20,6 @@
               </form>
           </div>
          
-          <p>Result from scan: {{scannedCode }}</p>
-          <p>Employee id: {{ employeeId }}</p>
           <div id="login-button-container">
             <ion-button [disabled]="pin.invalid" (click)="login()" shape="round">Log in</ion-button>
             <div class="danger" *ngIf="pinNotFound">
