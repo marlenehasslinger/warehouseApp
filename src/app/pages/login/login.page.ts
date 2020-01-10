@@ -47,10 +47,12 @@ export class LoginPage implements OnInit {
         console.log(res.user.uid);
         this.user.uid = res.user.uid;
         this.user.pin = this.employeePin;
+        /*
         // todo: delete later and enable code scan again
         this.userService.setUser(this.user);
         this.router.navigateByUrl("precheck");
-        //this.scanCode();
+        */
+        this.scanCode();
       }
     } catch(err) {
       this.pinNotFound = true;
