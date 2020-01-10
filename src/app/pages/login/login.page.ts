@@ -40,7 +40,6 @@ export class LoginPage implements OnInit {
 
     try {
       // kind of a hack
-      let that = this;
       const res = await this.afAuth.auth.signInWithEmailAndPassword(this.employeePin + "@testemail.com", "123456");
       if(res.user){
         this.pinNotFound = false;
@@ -73,6 +72,7 @@ export class LoginPage implements OnInit {
           this.user.truck = this.scannedCode;
           this.userService.setUser(this.user);
           loading.dismiss();
+          this.myForm.reset();
           this.router.navigateByUrl("precheck");
         }
         loading.dismiss();
@@ -80,7 +80,12 @@ export class LoginPage implements OnInit {
     );
   }
 
+
   ngOnInit() {
+  }
+
+  goToTutorial(){
+    this.router.navigateByUrl("tutorial");
   }
 
 }
