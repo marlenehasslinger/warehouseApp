@@ -21,12 +21,15 @@
           </div>
          
           <div id="login-button-container">
-            <ion-button [disabled]="pin.invalid" (click)="login()" shape="round">Log in</ion-button>
+            <ion-button expand="block"[disabled]="pin.invalid" (click)="login()" >Log in</ion-button>
             <div class="danger" *ngIf="pinNotFound">
                 Please enter a valid PIN.
             </div>
           </div>
-          
           </ion-card-content>
       </ion-card>
+
+      <ion-button class="tutorialButton" expand="block" fill="outline">Tutorial</ion-button>
+
+
 </ion-content>
