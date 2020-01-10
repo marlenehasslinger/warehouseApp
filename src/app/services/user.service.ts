@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
-import { first } from 'rxjs/operators';
 
-interface user {
+export interface user {
 	pin: string,
   uid: string,
   truck: string

@@ -12,6 +12,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
 import firebaseConfig from './firebase';
 import { AngularFireModule } from '@angular/fire';
 import {AngularFireAuthModule } from '@angular/fire/auth';
+import {AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import {AngularFireAuthModule } from '@angular/fire/auth';
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     IonicModule.forRoot({
       scrollPadding: false,
       scrollAssist: true, 
