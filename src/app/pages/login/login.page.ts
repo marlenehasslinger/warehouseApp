@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,7 @@ export class LoginPage implements OnInit {
   employeeId = null;
   scannedCode = null;
 
-  constructor(public formBuilder: FormBuilder, public barcodeScanner: BarcodeScanner, private router: Router) {
+  constructor(public afAuth: AngularFireAuth, public formBuilder: FormBuilder, public barcodeScanner: BarcodeScanner, private router: Router) {
     this.myForm = this.formBuilder.group({
       pin: ['', Validators.required],
       });
@@ -24,10 +26,21 @@ export class LoginPage implements OnInit {
     return this.myForm.get('pin');
   }
 
-  login(){
+  async login(){
     this.buttonPressed = true;
     this.employeeId = this.myForm.value.pin;
-    this.scanCode();
+
+    try {
+      // kind of a hack
+      const res = await this.afAuth.auth.signInWithEmailAndPassword(this.employeeId + "@testemail.com", "123456");
+      if(res.user){
+        this.employeeId = this.myForm.value.pin;
+        this.scanCode();
+      }
+    } catch(err) {
+      console.dir(err);
+    }
+
   }
 
   scanCode() {
