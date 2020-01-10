@@ -22,8 +22,8 @@
           <p>Employee id: {{ employeeId }}</p>
           <div id="login-button-container">
             <ion-button [disabled]="pin.invalid" (click)="login()" shape="round">Log in</ion-button>
-            <div class="danger" *ngIf="pin.invalid && buttonPressed">
-                Please enter your PIN.
+            <div class="danger" *ngIf="pinNotFound">
+                Please enter a valid PIN.
             </div>
           </div>
           
