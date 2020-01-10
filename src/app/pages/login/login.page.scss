@@ -9,7 +9,7 @@ ion-content{
 ion-card {
    // text-align: center;
     width: 70%;
-    height: 400px;
+    height: 350px;
     margin-top: 20%;
     margin-left: 15%;
     margin-right: 15%;
@@ -32,6 +32,10 @@ ion-input {
 
 }
 
+.danger {
+    color: red;
+}
+
 #login-button-container {
-    margin-top:25%;
+    margin-top:25px;
 }

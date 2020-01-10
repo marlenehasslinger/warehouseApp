@@ -15,6 +15,7 @@ export class LoginPage implements OnInit {
   buttonPressed:boolean = false;
   employeeId = null;
   scannedCode = null;
+  pinNotFound = false;
 
   constructor(public afAuth: AngularFireAuth, public formBuilder: FormBuilder, public barcodeScanner: BarcodeScanner, private router: Router) {
     this.myForm = this.formBuilder.group({
@@ -34,10 +35,11 @@ export class LoginPage implements OnInit {
       // kind of a hack
       const res = await this.afAuth.auth.signInWithEmailAndPassword(this.employeeId + "@testemail.com", "123456");
       if(res.user){
-        this.employeeId = this.myForm.value.pin;
+        this.pinNotFound = false;
         this.scanCode();
       }
     } catch(err) {
+      this.pinNotFound = true;
       console.dir(err);
     }
 
