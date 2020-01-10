@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { user, UserService } from '../../services/user.service';
 import { userData, DbService } from '../../services/db.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-precheck',
@@ -15,7 +16,7 @@ export class PrecheckPage implements OnInit {
     pin: ""
   }
 
-  constructor(public userService: UserService, public dbService: DbService) { }
+  constructor(public userService: UserService, public dbService: DbService, public router: Router) { }
 
   ngOnInit() {
     this.user = this.userService.getUser();
@@ -24,6 +25,12 @@ export class PrecheckPage implements OnInit {
       this.userData = res;
       console.log(this.userData);
     });
+  }
+
+
+  goToOrders() {
+    console.log("gotoorders");
+    this.router.navigateByUrl("menu");
   }
 
 }

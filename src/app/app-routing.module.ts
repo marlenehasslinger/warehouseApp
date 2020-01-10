@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'precheck',
     loadChildren: () => import('./pages/precheck/precheck.module').then( m => m.PrecheckPageModule)
   },
+  {
+    path: 'timelog',
+    loadChildren: () => import('./pages/timelog/timelog.module').then( m => m.TimelogPageModule)
+  },
 ];
 
 @NgModule({
