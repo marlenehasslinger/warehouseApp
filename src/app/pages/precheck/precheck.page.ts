@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { user, UserService } from '../../services/user.service';
 import { userData, DbService } from '../../services/db.service';
-
-
-interface user {
-	pin: string,
-  uid: string,
-  truck: string
-}
 
 @Component({
   selector: 'app-precheck',
@@ -21,7 +14,7 @@ export class PrecheckPage implements OnInit {
     lastname: "",
     pin: ""
   }
-  
+
   constructor(public userService: UserService, public dbService: DbService) { }
 
   ngOnInit() {
