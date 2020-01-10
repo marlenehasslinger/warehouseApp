@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { UserService } from '../../services/user.service';
 import { auth } from 'firebase/app';
 import { userInfo } from 'os';
+import { LoadingController } from '@ionic/angular';
 
 interface user {
 	pin: string,
@@ -30,7 +31,7 @@ export class LoginPage implements OnInit {
     truck: ""
   };
 
-  constructor(public userService: UserService, public afAuth: AngularFireAuth, public formBuilder: FormBuilder, public barcodeScanner: BarcodeScanner, private router: Router) {
+  constructor(public userService: UserService, public afAuth: AngularFireAuth, public formBuilder: FormBuilder, public barcodeScanner: BarcodeScanner, private router: Router, private loadingController: LoadingController) {
     this.myForm = this.formBuilder.group({
       pin: ['', Validators.required],
       });
@@ -62,15 +63,21 @@ export class LoginPage implements OnInit {
 
   }
 
-  scanCode() {
+  async scanCode() {
+    let loading = await this.loadingController.create({
+      message: 'Please wait...'
+    });
+    await loading.present();
     this.barcodeScanner.scan().then(
       barcodeData => {
         this.scannedCode = barcodeData.text;
         if(!barcodeData.cancelled){
           this.user.truck = this.scannedCode;
           this.userService.setUser(this.user);
+          loading.dismiss();
           this.router.navigateByUrl("precheck");
         }
+        loading.dismiss();
       }
     );
   }
