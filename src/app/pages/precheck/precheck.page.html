@@ -1,10 +1,157 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>precheck</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="secondary">
+          <ion-button>
+            <ion-icon slot="icon-only" name="ios-battery-charging"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title>Hi {{userData.firstname}},  please check your truck before you drive</ion-title>
+      </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-<p>Hi {{userData.firstname}}!</p>
-<p>Truck ID : {{user.truck}}</p>
+
+      <ion-card class="truck-card">
+          <ion-card-header>
+            <ion-card-subtitle>Today you are driving</ion-card-subtitle>
+            <ion-card-title>Rocla Super Truck 3000 {{user.truck}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Please check the vehicle for the following defects:</p>
+            <ion-list>
+                <ion-item>
+                  <ion-label>Loud noises from the engine</ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Damaged fork</ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Damage to the body work</ion-label>
+                </ion-item>
+              </ion-list>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+            <ion-item>
+                <ion-checkbox color="primary" slot="end"></ion-checkbox>
+                <ion-label>Engine</ion-label>
+              </ion-item>
+            <ion-card-content>
+                <ion-list>
+                    <ion-item>
+                      <ion-label>Loud noises</ion-label>
+                      <ion-checkbox slot="start"></ion-checkbox>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label>Does not turn on</ion-label>
+                      <ion-checkbox slot="start"></ion-checkbox>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label>Oil is leeking</ion-label>
+                      <ion-checkbox slot="start"></ion-checkbox>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">Other</ion-label>
+                        <ion-input placeholder="Please enter details" clear-input="true"></ion-input>
+                    </ion-item>
+                  </ion-list>
+            </ion-card-content>
+          </ion-card>
+
+          <ion-card>
+              <ion-item>
+                  <ion-checkbox color="primary" slot="end"></ion-checkbox>
+                  <ion-label>Engine</ion-label>
+                </ion-item>
+              <ion-card-content>
+                  <ion-list>
+                      <ion-item>
+                        <ion-label>Loud noises</ion-label>
+                        <ion-checkbox slot="start"></ion-checkbox>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label>Does not turn on</ion-label>
+                        <ion-checkbox slot="start"></ion-checkbox>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label>Oil is leeking</ion-label>
+                        <ion-checkbox slot="start"></ion-checkbox>
+                      </ion-item>
+                      <ion-item>
+                          <ion-label position="floating">Other</ion-label>
+                          <ion-input placeholder="Please enter details" clear-input="true"></ion-input>
+                      </ion-item>
+                    </ion-list>
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card>
+                <ion-item>
+                    <ion-checkbox color="primary" slot="end"></ion-checkbox>
+                    <ion-label>Engine</ion-label>
+                  </ion-item>
+                <ion-card-content>
+                    <ion-list>
+                        <ion-item>
+                          <ion-label>Loud noises</ion-label>
+                          <ion-checkbox slot="start"></ion-checkbox>
+                        </ion-item>
+                        <ion-item>
+                          <ion-label>Does not turn on</ion-label>
+                          <ion-checkbox slot="start"></ion-checkbox>
+                        </ion-item>
+                        <ion-item>
+                          <ion-label>Oil is leeking</ion-label>
+                          <ion-checkbox slot="start"></ion-checkbox>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label position="floating">Other</ion-label>
+                            <ion-input placeholder="Please enter details" clear-input="true"></ion-input>
+                        </ion-item>
+                      </ion-list>
+                </ion-card-content>
+              </ion-card>
+
+              <ion-card>
+                  <ion-item>
+                      <ion-checkbox color="primary" slot="end"></ion-checkbox>
+                      <ion-label>Engine</ion-label>
+                    </ion-item>
+                  <ion-card-content>
+                      <ion-list>
+                          <ion-item>
+                            <ion-label>Loud noises</ion-label>
+                            <ion-checkbox slot="start"></ion-checkbox>
+                          </ion-item>
+                          <ion-item>
+                            <ion-label>Does not turn on</ion-label>
+                            <ion-checkbox slot="start"></ion-checkbox>
+                          </ion-item>
+                          <ion-item>
+                            <ion-label>Oil is leeking</ion-label>
+                            <ion-checkbox slot="start"></ion-checkbox>
+                          </ion-item>
+                          <ion-item>
+                              <ion-label position="floating">Other</ion-label>
+                              <ion-input placeholder="Please enter details" clear-input="true"></ion-input>
+                          </ion-item>
+                        </ion-list>
+                  </ion-card-content>
+                </ion-card>
+
+                <ion-card>
+                    <ion-item>
+                        <ion-checkbox color="primary" slot="end"></ion-checkbox>
+                        <ion-label>Other</ion-label>
+                      </ion-item>
+                    <ion-card-content>
+                        <ion-label position="floating">Comment</ion-label>
+                        <ion-input placeholder="Please enter details" clear-input="true"></ion-input>
+                    </ion-card-content>
+                  </ion-card>
+
+                  <ion-button expand="block">Continue</ion-button>
+
 </ion-content>

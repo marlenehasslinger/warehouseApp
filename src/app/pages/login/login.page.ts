@@ -3,16 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { UserService } from '../../services/user.service';
+import { user, UserService } from '../../services/user.service';
 import { auth } from 'firebase/app';
-import { userInfo } from 'os';
 import { LoadingController } from '@ionic/angular';
-
-interface user {
-	pin: string,
-  uid: string,
-  truck: string
-}
 
 @Component({
   selector: 'app-login',
@@ -54,7 +47,10 @@ export class LoginPage implements OnInit {
         console.log(res.user.uid);
         this.user.uid = res.user.uid;
         this.user.pin = this.employeePin;
-        this.scanCode();
+        // todo: delete later and enable code scan again
+        this.userService.setUser(this.user);
+        this.router.navigateByUrl("precheck");
+        //this.scanCode();
       }
     } catch(err) {
       this.pinNotFound = true;
