@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Need any help? I got you.</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide>
+          <div>
+              <img src="../../../assets/lifttruck.png"/>
+              <h2>Hi, I'm Daisy, and I'm here to help you.</h2>
+              <p>First of all - after you log in and before you start driving, you need to check if the engine and fork of your truck are in a good condition. If there is anything else wrong with the truck, you can take note of that too.</p>
+          </div>
+        </ion-slide>
+        <ion-slide>
+            <div>
+                <img src="../../../assets/lifttruck.png"/>
+                <h2>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, .</h2>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="last-div">
+                <h2>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, .</h2>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+                <ion-button (click)="goToLogin()" expand="block">I'm ready to go!</ion-button>
+            </div>
+        </ion-slide>
+      </ion-slides>
+</ion-content>
