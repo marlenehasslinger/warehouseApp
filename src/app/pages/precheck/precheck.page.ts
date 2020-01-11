@@ -20,10 +20,8 @@ export class PrecheckPage implements OnInit {
 
   ngOnInit() {
     this.user = this.userService.getUser();
-    console.log(this.user.uid);
     this.dbService.getUserData(this.user.uid).subscribe(res => {
       this.userData = res;
-      console.log(this.userData);
     });
   }
 

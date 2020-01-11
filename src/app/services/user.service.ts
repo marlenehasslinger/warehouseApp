@@ -23,7 +23,7 @@ export class UserService {
   }
 
   getUID(): string {
-		return this.user.uid
+		return this.user.uid;
   }
 
   getPIN(): string {

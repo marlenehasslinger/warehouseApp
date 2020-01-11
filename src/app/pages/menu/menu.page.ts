@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
+import { DbService } from 'src/app/services/db.service';
 
 @Component({
   selector: 'app-menu',
@@ -21,7 +22,7 @@ export class MenuPage implements OnInit {
 
   selectedPath = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private dbService: DbService) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedPath = event.url;
     })
@@ -31,7 +32,9 @@ export class MenuPage implements OnInit {
   }
 
   logout(){
+    this.dbService.addTimeLog(new Date().getTime());
     this.router.navigateByUrl("login");
+
   }
 
 }
