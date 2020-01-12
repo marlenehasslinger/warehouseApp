@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { user, UserService } from '../../services/user.service';
+import { user, DbService } from '../../services/db.service';
 import { auth } from 'firebase/app';
 import { LoadingController } from '@ionic/angular';
 import { TruckService } from 'src/app/services/truck.service';
@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
     truck: ""
   };
 
-  constructor(public userService: UserService,
+  constructor(public dbService: DbService,
     public afAuth: AngularFireAuth,
     public formBuilder: FormBuilder,
     public barcodeScanner: BarcodeScanner,
@@ -57,7 +57,7 @@ export class LoginPage implements OnInit {
         // todo: delete the following later and enable code scan 
         this.user.truck = "truck1";
         this.truckService.setTruck(this.user.truck);
-        this.userService.setUser(this.user);
+        this.dbService.setUser(this.user);
         this.router.navigateByUrl("precheck");
         
         // uncomment to activate code scan
@@ -81,7 +81,7 @@ export class LoginPage implements OnInit {
         if(!barcodeData.cancelled){
           this.user.truck = this.scannedCode;
           this.truckService.setTruck(this.user.truck);
-          this.userService.setUser(this.user);
+          this.dbService.setUser(this.user);
           loading.dismiss();
           this.myForm.reset();
           this.router.navigateByUrl("precheck");

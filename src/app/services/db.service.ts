@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UserService } from './user.service';
 import { TruckService } from './truck.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 export interface userData {
 	firstname: string,
@@ -23,10 +23,18 @@ export interface truck {
   id: string
 }
 
+
+export interface user {
+	pin: string,
+  uid: string,
+  truck: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class DbService {
+  user: user;
   private userCollection: AngularFirestoreCollection<userData>;
   private truckCollection: AngularFirestoreCollection<truck>;
   private timelogCollection: AngularFirestoreCollection<timeLog>;
@@ -34,7 +42,9 @@ export class DbService {
   public loginTime:number;
   public userId:string;
 
-  constructor(private db: AngularFirestore, public userService:UserService, public truckService: TruckService
+  constructor(private db: AngularFirestore,
+    public truckService: TruckService,
+    public afAuth: AngularFireAuth
     ) {
     this.userCollection = db.collection<userData>('users');
     this.truckCollection = db.collection<truck>('trucks');
@@ -42,6 +52,24 @@ export class DbService {
   }
 
   // User data
+
+
+  setUser(user: user) {
+    this.user = user;
+  }
+
+  getUID(): string {
+		return this.user.uid;
+  }
+
+  getPIN(): string {
+		return this.user.pin;
+  }
+  
+  getUser(): user {
+    return this.user;
+  }
+
 
   getUserData(id: string){
     // set login time for data aquisition
