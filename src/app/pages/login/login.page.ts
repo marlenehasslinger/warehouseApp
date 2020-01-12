@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { user, UserService } from '../../services/user.service';
 import { auth } from 'firebase/app';
 import { LoadingController } from '@ionic/angular';
+import { TruckService } from 'src/app/services/truck.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,13 @@ export class LoginPage implements OnInit {
     truck: ""
   };
 
-  constructor(public userService: UserService, public afAuth: AngularFireAuth, public formBuilder: FormBuilder, public barcodeScanner: BarcodeScanner, private router: Router, private loadingController: LoadingController) {
+  constructor(public userService: UserService,
+    public afAuth: AngularFireAuth,
+    public formBuilder: FormBuilder,
+    public barcodeScanner: BarcodeScanner,
+    private router: Router,
+    private loadingController: LoadingController,
+    private truckService:TruckService) {
     this.myForm = this.formBuilder.group({
       pin: ['', Validators.required],
       });
@@ -46,12 +53,15 @@ export class LoginPage implements OnInit {
         console.log(res.user.uid);
         this.user.uid = res.user.uid;
         this.user.pin = this.employeePin;
-        
-        // todo: delete later and enable code scan again
+
+        // todo: delete the following later and enable code scan 
+        this.user.truck = "truck1";
+        this.truckService.setTruck(this.user.truck);
         this.userService.setUser(this.user);
         this.router.navigateByUrl("precheck");
         
-        //this.scanCode();
+        // uncomment to activate code scan
+        // this.scanCode();
       }
     } catch(err) {
       this.pinNotFound = true;
@@ -70,6 +80,7 @@ export class LoginPage implements OnInit {
         this.scannedCode = barcodeData.text;
         if(!barcodeData.cancelled){
           this.user.truck = this.scannedCode;
+          this.truckService.setTruck(this.user.truck);
           this.userService.setUser(this.user);
           loading.dismiss();
           this.myForm.reset();

@@ -33,6 +33,7 @@ export class MenuPage implements OnInit {
 
   logout(){
     this.dbService.addTimeLog(new Date().getTime());
+    this.dbService.updateTruckDuration(new Date().getTime())
     this.router.navigateByUrl("login");
 
   }
