@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { user, userData, DbService } from '../../services/db.service';
+import { user, UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,25 +8,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./precheck.page.scss'],
 })
 export class PrecheckPage implements OnInit {
-  user: user;
-  userData: userData = {
+  user: user = {
     firstname: "",
     lastname: "",
-    pin: ""
+    pin: "",
+    uid: ""
   }
 
-  constructor(public dbService: DbService, public router: Router) { }
+  constructor(public userService: UserService, public router: Router) { }
 
   ngOnInit() {
-    this.user = this.dbService.getUser();
-    this.dbService.getUserData(this.user.uid).subscribe(res => {
-      this.userData = res;
-    });
+    this.user = this.userService.getUser();
   }
 
 
   goToOrders() {
-    console.log("gotoorders");
     this.router.navigateByUrl("menu");
   }
 
