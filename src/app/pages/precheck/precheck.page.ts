@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { user, UserService } from '../../services/user.service';
-import { userData, DbService } from '../../services/db.service';
+import { user, userData, DbService } from '../../services/db.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,10 +15,10 @@ export class PrecheckPage implements OnInit {
     pin: ""
   }
 
-  constructor(public userService: UserService, public dbService: DbService, public router: Router) { }
+  constructor(public dbService: DbService, public router: Router) { }
 
   ngOnInit() {
-    this.user = this.userService.getUser();
+    this.user = this.dbService.getUser();
     this.dbService.getUserData(this.user.uid).subscribe(res => {
       this.userData = res;
     });
