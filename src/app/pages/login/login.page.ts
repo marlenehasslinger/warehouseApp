@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { user, DbService } from '../../services/db.service';
+import { user, UserService } from 'src/app/services/user.service';
 import { auth } from 'firebase/app';
 import { LoadingController } from '@ionic/angular';
 import { TruckService } from 'src/app/services/truck.service';
@@ -19,13 +19,9 @@ export class LoginPage implements OnInit {
   employeePin: string = null;
   scannedCode: string = null;
   pinNotFound: boolean = false;
-  user: user = {
-    pin: "",
-    uid: "",
-    truck: ""
-  };
+  uid: string;
 
-  constructor(public dbService: DbService,
+  constructor(public userService: UserService,
     public afAuth: AngularFireAuth,
     public formBuilder: FormBuilder,
     public barcodeScanner: BarcodeScanner,
@@ -50,15 +46,15 @@ export class LoginPage implements OnInit {
       const res = await this.afAuth.auth.signInWithEmailAndPassword(this.employeePin + "@testemail.com", "123456");
       if(res.user){
         this.pinNotFound = false;
-        console.log(res.user.uid);
-        this.user.uid = res.user.uid;
-        this.user.pin = this.employeePin;
+        this.uid = res.user.uid;
 
-        // todo: delete the following later and enable code scan 
-        this.user.truck = "truck1";
-        this.truckService.setTruck(this.user.truck);
-        this.dbService.setUser(this.user);
-        this.router.navigateByUrl("precheck");
+        // todo: just to skip code scan - delete the following later and enable code scan
+        this.truckService.setTruck("truck1");
+
+        this.userService.getUserData(this.uid).subscribe(res => {
+          this.userService.setUser(res);
+          this.router.navigateByUrl("precheck");
+        });
         
         // uncomment to activate code scan
         // this.scanCode();
@@ -79,12 +75,13 @@ export class LoginPage implements OnInit {
       barcodeData => {
         this.scannedCode = barcodeData.text;
         if(!barcodeData.cancelled){
-          this.user.truck = this.scannedCode;
-          this.truckService.setTruck(this.user.truck);
-          this.dbService.setUser(this.user);
+          this.truckService.setTruck(this.scannedCode);
           loading.dismiss();
           this.myForm.reset();
-          this.router.navigateByUrl("precheck");
+          this.userService.getUserData(this.uid).subscribe(res => {
+            this.userService.setUser(res);
+            this.router.navigateByUrl("precheck");
+          });
         }
         loading.dismiss();
       }

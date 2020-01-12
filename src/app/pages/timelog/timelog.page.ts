@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DbService, timeLog } from 'src/app/services/db.service';
+import { UserService, timeLog } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-timelog',
@@ -9,11 +9,11 @@ import { DbService, timeLog } from 'src/app/services/db.service';
 export class TimelogPage implements OnInit {
   timeLogs: timeLog[];
 
-  constructor(private dbService: DbService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
-    let userId = this.dbService.getUID();
-    this.dbService.getTimeLogs(userId).subscribe(res => {
+    let userId = this.userService.getUID();
+    this.userService.getTimeLogs(userId).subscribe(res => {
       this.timeLogs = res;
       console.log(this.timeLogs);
     });

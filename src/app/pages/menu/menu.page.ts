@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
-import { DbService } from 'src/app/services/db.service';
+import { UserService } from 'src/app/services/user.service';
+import { TruckService } from 'src/app/services/truck.service';
 
 @Component({
   selector: 'app-menu',
@@ -22,7 +23,7 @@ export class MenuPage implements OnInit {
 
   selectedPath = '';
 
-  constructor(private router: Router, private dbService: DbService) {
+  constructor(private router: Router, private userService: UserService, private truckService: TruckService) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedPath = event.url;
     })
@@ -32,8 +33,8 @@ export class MenuPage implements OnInit {
   }
 
   logout(){
-    this.dbService.addTimeLog(new Date().getTime());
-    this.dbService.updateTruckDuration(new Date().getTime())
+    this.userService.addTimeLog(new Date().getTime());
+    this.truckService.updateTruckLog(new Date().getTime())
     this.router.navigateByUrl("login");
 
   }
