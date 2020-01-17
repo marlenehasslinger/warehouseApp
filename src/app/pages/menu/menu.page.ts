@@ -16,8 +16,8 @@ export class MenuPage implements OnInit {
       url: '/menu/orders'
     },
     {
-      title: 'User Time Log',
-      url: '/menu/timelog'
+      title: 'Employees',
+      url: '/menu/userlog'
     },
   ];
 
