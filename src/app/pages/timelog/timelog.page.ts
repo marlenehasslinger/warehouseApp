@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, timeLog } from 'src/app/services/user.service';
+import { UserService, timeLog, user } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-timelog',
@@ -8,6 +8,7 @@ import { UserService, timeLog } from 'src/app/services/user.service';
 })
 export class TimelogPage implements OnInit {
   timeLogs: timeLog[];
+  users: user[];
 
   constructor(private userService: UserService) { }
 
@@ -17,6 +18,10 @@ export class TimelogPage implements OnInit {
       this.timeLogs = res;
       console.log(this.timeLogs);
     });
+    this.userService.getAllUsers().subscribe(res => {
+      this.users = res;
+      console.log(this.users);
+    });;
   }
 
 }

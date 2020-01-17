@@ -11,9 +11,10 @@
 
 <ion-content>
     <ion-list>
-        <ion-item *ngFor="let item of timeLogs">
-          <ion-label>{{item.date | date:'short' }}</ion-label>
-          <ion-label>{{item.duration }} mins</ion-label>
+        <ion-item *ngFor="let user of users">
+            <ion-label>{{user.firstname}} {{user.lastname}}</ion-label>
+          <!--<ion-label>{{item.date | date:'short' }}</ion-label>
+          <ion-label>{{item.duration }} mins</ion-label>-->
         </ion-item>
       </ion-list>
 </ion-content>
