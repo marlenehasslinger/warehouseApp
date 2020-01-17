@@ -27,6 +27,7 @@ export class UserService {
   private timelogCollection: AngularFirestoreCollection<timeLog>;
   private timelogs: Observable<timeLog[]>;
   private loginTime: number;
+  private users:Observable<user[]>;
 
   constructor(private db: AngularFirestore, public truckService: TruckService, public afAuth: AngularFireAuth) {
     this.userCollection = db.collection<user>('users');
@@ -61,6 +62,21 @@ export class UserService {
 
   updateUserData(user: user, id: string) {
     return this.userCollection.doc(id).update(user);
+  }
+
+  getAllUsers() {
+    this.users = this.userCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+
+    );
+
+    return this.users;
   }
 
   // Time Logs
