@@ -16,7 +16,7 @@ export class MenuPage implements OnInit {
       url: '/menu/orders'
     },
     {
-      title: 'Time Log',
+      title: 'User Time Log',
       url: '/menu/timelog'
     },
   ];
@@ -34,7 +34,7 @@ export class MenuPage implements OnInit {
 
   logout(){
     this.userService.addTimeLog(new Date().getTime());
-    this.truckService.updateTruckLog(new Date().getTime())
+    this.truckService.addTruckLog(this.userService.getUser(), new Date().getTime());
     this.router.navigateByUrl("login");
 
   }
