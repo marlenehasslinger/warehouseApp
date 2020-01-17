@@ -50,13 +50,16 @@ export class LoginPage implements OnInit {
 
         // todo: just to skip code scan - delete the following later and enable code scan
         this.truckService.setTruck("truck1");
+        this.userService.setLoginTime();
+        this.truckService.setLoginTime();
 
         this.userService.getUserData(this.uid).subscribe(res => {
           this.userService.setUser(res);
           this.router.navigateByUrl("precheck");
         });
-        
-        // uncomment to activate code scan
+        // until here 
+
+        // then uncomment to activate code scan
         // this.scanCode();
       }
     } catch(err) {
@@ -78,6 +81,8 @@ export class LoginPage implements OnInit {
           this.truckService.setTruck(this.scannedCode);
           loading.dismiss();
           this.myForm.reset();
+          this.userService.setLoginTime();
+          this.truckService.setLoginTime();
           this.userService.getUserData(this.uid).subscribe(res => {
             this.userService.setUser(res);
             this.router.navigateByUrl("precheck");
