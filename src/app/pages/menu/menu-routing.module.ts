@@ -17,9 +17,14 @@ const routes: Routes = [
         loadChildren: () => import('../timelog/timelog.module').then( m => m.TimelogPageModule)
       },
       {
+        path: 'userlog',
+        loadChildren: () => import('../userlog/userlog.module').then( m => m.UserlogPageModule)
+      },
+      {
         path: '',
         redirectTo: '/menu/orders'
       }
+
     ]
   }
 ];
