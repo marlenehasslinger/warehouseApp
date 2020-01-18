@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: TrucklogPage
+  },
+  {
+    path: 'trucklogdetail',
+    loadChildren: () => import('./trucklogdetail/trucklogdetail.module').then( m => m.TrucklogdetailPageModule)
+  },
+  {
+    path: 'trucklogdetail/:truck',
+    loadChildren: () => import('./trucklogdetail/trucklogdetail.module').then( m => m.TrucklogdetailPageModule)
   }
 ];
 
