@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TimelogPageRoutingModule } from './timelog-routing.module';
+import { UserdetailPageRoutingModule } from './userdetail-routing.module';
 
-import { TimelogPage } from './timelog.page';
+import { UserdetailPage } from './userdetail.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TimelogPageRoutingModule
+    UserdetailPageRoutingModule
   ],
-  declarations: [TimelogPage]
+  declarations: [UserdetailPage]
 })
-export class TimelogPageModule {}
+export class UserdetailPageModule {}

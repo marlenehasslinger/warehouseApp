@@ -20,16 +20,20 @@ const routes: Routes = [
     loadChildren: () => import('./pages/precheck/precheck.module').then( m => m.PrecheckPageModule)
   },
   {
-    path: 'timelog',
-    loadChildren: () => import('./pages/timelog/timelog.module').then( m => m.TimelogPageModule)
-  },
-  {
     path: 'tutorial',
     loadChildren: () => import('./pages/tutorial/tutorial.module').then( m => m.TutorialPageModule)
   },
   {
     path: 'userlog',
     loadChildren: () => import('./pages/userlog/userlog.module').then( m => m.UserlogPageModule)
+  },
+  {
+    path: 'userdetail/:user',
+    loadChildren: () => import('./pages/userdetail/userdetail.module').then( m => m.UserdetailPageModule),
+  },
+  {
+    path: 'userdetail',
+    loadChildren: () => import('./pages/userdetail/userdetail.module').then( m => m.UserdetailPageModule)
   },
 ];
 

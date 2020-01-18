@@ -13,17 +13,21 @@ const routes: Routes = [
         loadChildren: () => import('../orders/orders.module').then( m => m.OrdersPageModule)
       },
       {
-        path: 'timelog',
-        loadChildren: () => import('../timelog/timelog.module').then( m => m.TimelogPageModule)
-      },
-      {
         path: 'userlog',
         loadChildren: () => import('../userlog/userlog.module').then( m => m.UserlogPageModule)
       },
       {
         path: '',
         redirectTo: '/menu/orders'
-      }
+      },
+      {
+        path: 'userdetail/:user',
+        loadChildren: () => import('../userdetail/userdetail.module').then( m => m.UserdetailPageModule)
+      },
+      {
+        path: 'userdetail',
+        loadChildren: () => import('../userdetail/userdetail.module').then( m => m.UserdetailPageModule)
+      },
 
     ]
   }

@@ -54,7 +54,8 @@ export class TruckService {
   }
 
   addTruckLog(user: user, time: number) {
-    let truck: truck;
+    if(user){
+      let truck: truck;
     let id = this.getTruckId();
     let driverName = user.firstname + " " + user.lastname;
     // calculate time difference between login and logout
@@ -78,6 +79,7 @@ export class TruckService {
       console.log("general duration: " + newDuration);
       this.truckCollection.doc(id).update({ duration: newDuration });
     });
+    }
 
   }
 

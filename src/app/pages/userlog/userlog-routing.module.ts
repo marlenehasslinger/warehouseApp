@@ -6,8 +6,17 @@ import { UserlogPage } from './userlog.page';
 const routes: Routes = [
   {
     path: '',
-    component: UserlogPage
+    component: UserlogPage,
+  },
+  {
+    path: 'userlogdetail',
+    loadChildren: () => import('./userlogdetail/userlogdetail.module').then( m => m.UserlogdetailPageModule)
+  },
+  {
+    path: 'userlogdetail/:user',
+    loadChildren: () => import('./userlogdetail/userlogdetail.module').then( m => m.UserlogdetailPageModule)
   }
+
 ];
 
 @NgModule({
