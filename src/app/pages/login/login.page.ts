@@ -49,7 +49,10 @@ export class LoginPage implements OnInit {
         this.uid = res.user.uid;
 
         // todo: just to skip code scan - delete the following later and enable code scan
-        this.truckService.setTruck("truck1");
+        this.truckService.getTruckData("truck1").subscribe(res => {
+          this.truckService.setTruck(res);
+        })
+
         this.userService.setLoginTime();
         this.truckService.setLoginTime();
 
@@ -78,7 +81,9 @@ export class LoginPage implements OnInit {
       barcodeData => {
         this.scannedCode = barcodeData.text;
         if(!barcodeData.cancelled){
-          this.truckService.setTruck(this.scannedCode);
+          this.truckService.getTruckData(this.scannedCode).subscribe(res => {
+            this.truckService.setTruck(res);
+          });
           loading.dismiss();
           this.myForm.reset();
           this.userService.setLoginTime();

@@ -19,6 +19,10 @@ export class MenuPage implements OnInit {
       title: 'Employees',
       url: '/menu/userlog'
     },
+    {
+      title: 'Trucks',
+      url: '/menu/trucklog'
+    },
   ];
 
   selectedPath = '';

@@ -5,16 +5,14 @@
               
             </ion-menu-button>
           </ion-buttons>
-      <ion-title>{{driver.firstname}} {{driver.lastname}}</ion-title>
+      <ion-title>Truck Time Log</ion-title>
     </ion-toolbar>
   </ion-header>
   
   <ion-content>
       <ion-list>
-          <ion-item *ngFor="let item of timeLogs">
-            <ion-label>{{item.date | date:'short' }}</ion-label>
-            <ion-label>{{item.duration }} mins</ion-label>
-            <ion-label>{{item.truck }} </ion-label>
+          <ion-item *ngFor="let truck of trucks">
+              <ion-label (click)="navigateToTruckDetail(truck)">{{truck.name}}</ion-label>
           </ion-item>
         </ion-list>
   </ion-content>

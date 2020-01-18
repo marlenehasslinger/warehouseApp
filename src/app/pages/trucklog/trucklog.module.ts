@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UserdetailPageRoutingModule } from './userdetail-routing.module';
+import { TrucklogPageRoutingModule } from './trucklog-routing.module';
 
-import { UserdetailPage } from './userdetail.page';
+import { TrucklogPage } from './trucklog.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UserdetailPageRoutingModule
+    TrucklogPageRoutingModule
   ],
-  declarations: [UserdetailPage]
+  declarations: [TrucklogPage]
 })
-export class UserdetailPageModule {}
+export class TrucklogPageModule {}
