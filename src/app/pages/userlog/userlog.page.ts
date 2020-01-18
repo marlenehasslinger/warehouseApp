@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, timeLog, user } from 'src/app/services/user.service';
+import { UserService, user } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-userlog',
@@ -7,21 +8,22 @@ import { UserService, timeLog, user } from 'src/app/services/user.service';
   styleUrls: ['./userlog.page.scss'],
 })
 export class UserlogPage implements OnInit {
-  timeLogs: timeLog[];
   users: user[];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    let userId = this.userService.getUID();
-    this.userService.getTimeLogs(userId).subscribe(res => {
-      this.timeLogs = res;
-      console.log(this.timeLogs);
-    });
     this.userService.getAllUsers().subscribe(res => {
       this.users = res;
       console.log(this.users);
-    });;
+    });
+  }
+
+  navigateToUserDetail(user: user){
+    console.log("uid from userlog: "+ user.uid);
+    //this.router.navigate(['userdetail', JSON.stringify(user)]);
+    this.router.navigate(['/menu/userlog/userlogdetail/', user.uid]);
+
   }
 
 }

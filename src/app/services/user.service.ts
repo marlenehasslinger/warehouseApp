@@ -8,6 +8,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export interface timeLog {
   date: number,
   duration: number,
+  truck: string
 
 }
 
@@ -98,16 +99,19 @@ export class UserService {
 
   addTimeLog(time: number) {
     // calculate time difference between login and logout
+    if(this.loginTime){
     let differenceMs = time - this.loginTime;
     console.log("logintime from user service: " + this.loginTime);
     let differenceMins = Math.round(((differenceMs % 86400000) % 3600000) / 60000) // minutes
 
     let newtimeLog: timeLog = {
+      truck: this.truckService.getTruck().id,
       date: time,
       duration: differenceMins
     }
 
     this.timelogCollection.add(newtimeLog);
+    }
   }
 
   setLoginTime() {
