@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { user } from './user.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 export interface truck {
   duration: number
@@ -20,24 +22,19 @@ export interface truckTimeLog {
 })
 
 export class TruckService {
-  loginTime: number;
+  private loginTime: number;
+  private trucks: Observable<truck[]>;
   private truckCollection: AngularFirestoreCollection<truck>;
   private timelogCollection: AngularFirestoreCollection<truckTimeLog>;
-  truck: truck = {
-    name: "",
-    duration: 0,
-    id: ""
-  }
+  private truck: truck;
 
   constructor(private db: AngularFirestore) {
     this.truckCollection = db.collection<truck>('trucks');
   }
 
 
-  setTruck(id: string) {
-    this.truck.id = id;
-    this.timelogCollection = this.truckCollection.doc(id).collection<truckTimeLog>('timelogs');
-
+  setTruck(truck: truck) {
+    this.truck = truck;
   }
 
   getTruck() {
@@ -49,42 +46,59 @@ export class TruckService {
   }
 
   getTruckData(id: string) {
-    return this.truckCollection.doc<truck>(id).valueChanges();
+    // Set timelog collection
+    this.timelogCollection = this.truckCollection.doc(id).collection<truckTimeLog>('timelogs');
 
+    return this.truckCollection.doc<truck>(id).valueChanges();
   }
 
   addTruckLog(user: user, time: number) {
-    if(user){
+    if (user) {
       let truck: truck;
-    let id = this.getTruckId();
-    let driverName = user.firstname + " " + user.lastname;
-    // calculate time difference between login and logout
-    console.log("loginTime: " + this.loginTime);
-    let differenceMs = time - this.loginTime;
-    let differenceMins = Math.round(((differenceMs % 86400000) % 3600000) / 60000); // minutes
+      let id = this.getTruckId();
+      let driverName = user.firstname + " " + user.lastname;
+      // calculate time difference between login and logout
+      console.log("loginTime: " + this.loginTime);
+      let differenceMs = time - this.loginTime;
+      let differenceMins = Math.round(((differenceMs % 86400000) % 3600000) / 60000); // minutes
 
-    let newTrucktimeLog: truckTimeLog = {
-      date: time,
-      duration: differenceMins,
-      driver: driverName
-    }
-    console.log("individual timelog: " + differenceMins);
+      let newTrucktimeLog: truckTimeLog = {
+        date: time,
+        duration: differenceMins,
+        driver: driverName
+      }
+      console.log("individual timelog: " + differenceMins);
 
-    this.timelogCollection.add(newTrucktimeLog);
+      this.timelogCollection.add(newTrucktimeLog);
 
 
-    this.getTruckData(id).subscribe(res => {
-      truck = res;
-      let newDuration = truck.duration + differenceMins;
-      console.log("general duration: " + newDuration);
-      this.truckCollection.doc(id).update({ duration: newDuration });
-    });
+      this.getTruckData(id).subscribe(res => {
+        truck = res;
+        let newDuration = truck.duration + differenceMins;
+        console.log("general duration: " + newDuration);
+        this.truckCollection.doc(id).update({ duration: newDuration });
+      });
     }
 
   }
 
+  getAllTrucks() {
+    this.trucks = this.truckCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+
+    );
+    return this.trucks;
+  }
+
   /*
-  getTimeLogs(id: string){
+  
+  getTruckLogs(id: string){
     this.timelogs = this.timelogCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {

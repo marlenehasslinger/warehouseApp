@@ -28,12 +28,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/userlog/userlog.module').then( m => m.UserlogPageModule)
   },
   {
-    path: 'userdetail/:user',
-    loadChildren: () => import('./pages/userdetail/userdetail.module').then( m => m.UserdetailPageModule),
-  },
-  {
-    path: 'userdetail',
-    loadChildren: () => import('./pages/userdetail/userdetail.module').then( m => m.UserdetailPageModule)
+    path: 'trucklog',
+    loadChildren: () => import('./pages/trucklog/trucklog.module').then( m => m.TrucklogPageModule)
   },
 ];
 

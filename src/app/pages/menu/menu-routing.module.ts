@@ -17,18 +17,13 @@ const routes: Routes = [
         loadChildren: () => import('../userlog/userlog.module').then( m => m.UserlogPageModule)
       },
       {
+        path: 'trucklog',
+        loadChildren: () => import('../trucklog/trucklog.module').then( m => m.TrucklogPageModule)
+      },
+      {
         path: '',
         redirectTo: '/menu/orders'
       },
-      {
-        path: 'userdetail/:user',
-        loadChildren: () => import('../userdetail/userdetail.module').then( m => m.UserdetailPageModule)
-      },
-      {
-        path: 'userdetail',
-        loadChildren: () => import('../userdetail/userdetail.module').then( m => m.UserdetailPageModule)
-      },
-
     ]
   }
 ];
