@@ -27,6 +27,8 @@ export class TruckService {
   private truckCollection: AngularFirestoreCollection<truck>;
   private timelogCollection: AngularFirestoreCollection<truckTimeLog>;
   private truck: truck;
+  private timelogs: Observable<truckTimeLog[]>;
+
 
   constructor(private db: AngularFirestore) {
     this.truckCollection = db.collection<truck>('trucks');
@@ -95,8 +97,6 @@ export class TruckService {
     );
     return this.trucks;
   }
-
-  /*
   
   getTruckLogs(id: string){
     this.timelogs = this.timelogCollection.snapshotChanges().pipe(
@@ -113,7 +113,8 @@ export class TruckService {
     console.log(this.timelogs);
     return this.timelogs;
   }
-*/
+
+
   setLoginTime() {
     this.loginTime = new Date().getTime();
     console.log("set logintime" + this.loginTime);

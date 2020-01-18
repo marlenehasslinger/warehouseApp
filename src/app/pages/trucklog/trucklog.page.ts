@@ -21,11 +21,9 @@ export class TrucklogPage implements OnInit {
   }
 
   navigateToTruckDetail(truck: truck){
-    /*
-    console.log("uid from userlog: "+ user.uid);
+    console.log("uid from trucklog: "+ truck.id);
     //this.router.navigate(['userdetail', JSON.stringify(user)]);
-    this.router.navigate(['/menu/userlog/userlogdetail/', user.uid]);
-    */
+    this.router.navigate(['/menu/trucklog/trucklogdetail/', truck.id]);
 
   }
   

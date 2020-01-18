@@ -23,7 +23,7 @@ export interface user {
   providedIn: 'root'
 })
 export class UserService {
-  user: user;
+  private user: user;
   private userCollection: AngularFirestoreCollection<user>;
   private timelogCollection: AngularFirestoreCollection<timeLog>;
   private timelogs: Observable<timeLog[]>;
