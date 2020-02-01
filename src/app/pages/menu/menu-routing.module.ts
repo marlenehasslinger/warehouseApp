@@ -24,6 +24,10 @@ const routes: Routes = [
         path: '',
         redirectTo: '/menu/orders'
       },
+      {
+        path: 'login',
+        loadChildren: () => import('../login/login.module').then( m => m.LoginPageModule)
+      },
     ]
   }
 ];
