@@ -3,7 +3,9 @@ ion-header {
 }
 
 ion-content{
-    --background: #202020;
+    --background: #EFEFEF;
+    font-size: 25px;
+    //--background: url(../../../assets/background.jpg) 0 0/100% 100% no-repeat;
 }
 
 h1 {
@@ -13,10 +15,14 @@ h1 {
     margin-top: 20%;
 }
 
+ion-card-title{
+    font-size: 30px;
+}
+
 ion-card {
    // text-align: center;
     width: 70%;
-    height: 320px;
+    height: 340px;
     margin-top: 5%;
     margin-left: 15%;
     margin-right: 15%;
@@ -25,6 +31,10 @@ ion-card {
 
 #pin-input {
     text-align: left;
+}
+
+ion-label{
+    font-size: 25px;
 }
 
 ion-card-content{
@@ -49,8 +59,25 @@ ion-input {
 
 .danger {
     color: red;
+    font-size: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #login-button-container {
     margin-top:25px;
+}
+
+ion-button {
+    font-size: 30px;
+    --padding-bottom: 30px;
+    --padding-top: 30px;
+}
+
+ion-toolbar {
+    --min-height:60px;
+}
+
+ion-title {
+    font-size: 25px;
 }

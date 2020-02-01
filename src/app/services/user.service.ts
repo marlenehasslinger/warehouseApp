@@ -103,9 +103,10 @@ export class UserService {
     let differenceMs = time - this.loginTime;
     console.log("logintime from user service: " + this.loginTime);
     let differenceMins = Math.round(((differenceMs % 86400000) % 3600000) / 60000) // minutes
+    differenceMins == 0? differenceMins = 1:differenceMins=differenceMins;
 
     let newtimeLog: timeLog = {
-      truck: this.truckService.getTruck().id,
+      truck: this.truckService.getTruck().name,
       date: time,
       duration: differenceMins
     }

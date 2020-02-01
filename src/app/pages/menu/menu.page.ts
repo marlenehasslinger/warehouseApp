@@ -37,10 +37,11 @@ export class MenuPage implements OnInit {
   }
 
   logout(){
+    console.log("entered logout");
+    this.router.navigateByUrl("login");
     this.userService.addTimeLog(new Date().getTime());
     this.truckService.addTruckLog(this.userService.getUser(), new Date().getTime());
-    this.router.navigateByUrl("login");
-
+    console.log("should have logged out");
   }
 
 }
