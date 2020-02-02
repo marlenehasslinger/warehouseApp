@@ -63,6 +63,7 @@ export class TruckService {
       console.log("loginTime: " + this.loginTime);
       let differenceMs = time - this.loginTime;
       let differenceMins = Math.round(((differenceMs % 86400000) % 3600000) / 60000); // minutes
+      differenceMins == 0? differenceMins = 1:differenceMins=differenceMins;
 
       let newTrucktimeLog: truckTimeLog = {
         date: time,
