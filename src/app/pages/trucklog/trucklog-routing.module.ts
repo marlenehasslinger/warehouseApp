@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'trucklogdetail/:truck',
     loadChildren: () => import('./trucklogdetail/trucklogdetail.module').then( m => m.TrucklogdetailPageModule)
+  },
+  {
+    path: 'truckoverview/:truck',
+    loadChildren: () => import('./truckoverview/truckoverview.module').then( m => m.TruckoverviewPageModule)
   }
 ];
 
