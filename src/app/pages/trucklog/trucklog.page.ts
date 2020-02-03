@@ -20,10 +20,9 @@ export class TrucklogPage implements OnInit {
     });
   }
 
-  navigateToTruckDetail(truck: truck){
+  navigateToTruckOverview(truck: truck){
     console.log("uid from trucklog: "+ truck.id);
-    //this.router.navigate(['userdetail', JSON.stringify(user)]);
-    this.router.navigate(['/menu/trucklog/trucklogdetail/', truck.id]);
+    this.router.navigate(['/menu/trucklog/truckoverview/', truck.id]);
 
   }
   

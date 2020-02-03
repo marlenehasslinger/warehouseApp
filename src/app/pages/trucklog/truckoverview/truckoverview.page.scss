@@ -1,0 +1,35 @@
+img {
+    max-height: 25%;
+    max-width: 25%;
+}
+
+.container {
+    text-align: center;
+}
+
+* {
+text-align: center;
+font-size: 25px;
+
+}
+
+ion-toolbar {
+    --min-height:60px;
+}
+
+ion-item {
+    --inner-padding-bottom: 15px;
+    --inner-padding-top: 15px;
+}
+
+ion-card {
+    height: 15%;
+}
+
+h1 {
+    font-size: 35px;
+}
+
+p {
+    padding-top:4%;
+}

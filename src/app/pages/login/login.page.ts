@@ -50,7 +50,7 @@ export class LoginPage implements OnInit {
 
         
         // todo: just to skip code scan - delete the following later and enable code scan
-        this.truckService.getTruckData("truck1").subscribe(res => {
+        /*this.truckService.getTruckData("truck1").subscribe(res => {
           this.truckService.setTruck(res);
         })
 
@@ -60,12 +60,12 @@ export class LoginPage implements OnInit {
         this.userService.getUserData(this.uid).subscribe(res => {
           this.userService.setUser(res);
           this.router.navigateByUrl("precheck");
-        });
+        });*/
         // until here 
         
 
         // then uncomment to activate code scan
-        //this.scanCode();
+        this.scanCode();
       }
     } catch(err) {
       this.pinNotFound = true;

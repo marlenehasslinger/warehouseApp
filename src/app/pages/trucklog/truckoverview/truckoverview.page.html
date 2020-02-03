@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Overview</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <h1>{{truck?.name}}</h1>
+<div class="container">
+  <img src="../../../assets/lifttruck.png"/>
+</div>
+<p>Last Maintainance: 01/2020</p>
+<ion-card (click)="navigateToTruckDetail()"><p>Time Logs</p></ion-card>
+<ion-card><p>Defects</p></ion-card>
+</ion-content>
