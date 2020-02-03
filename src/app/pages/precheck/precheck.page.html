@@ -27,7 +27,7 @@
                   <ion-label>Damaged fork</ion-label>
                 </ion-item>
                 <ion-item>
-                  <ion-label>Damage to the body work</ion-label>
+                  <ion-label>Damage to the bodywork</ion-label>
                 </ion-item>
               </ion-list>
           </ion-card-content>
@@ -49,13 +49,18 @@
                       <ion-checkbox slot="start"></ion-checkbox>
                     </ion-item>
                     <ion-item>
-                      <ion-label>Oil is leeking</ion-label>
+                      <ion-label>Oil is leaking</ion-label>
                       <ion-checkbox slot="start"></ion-checkbox>
                     </ion-item>
                     <ion-item>
                         <ion-label position="floating">Other</ion-label>
                         <ion-input placeholder="Please enter details" clear-input="true"></ion-input>
                     </ion-item>
+                    <img *ngIf="checkItemsPictureTaken[0]"[src]="base64Images[0]"/>
+                    <ion-button (click)="takePicture(0)" expand="block" fill="outline">
+                      <ion-icon name="camera" slot="start"></ion-icon>
+                      Take Photo
+                    </ion-button>
                   </ion-list>
             </ion-card-content>
           </ion-card>
@@ -83,6 +88,11 @@
                           <ion-label position="floating">Other</ion-label>
                           <ion-input placeholder="Please enter details" clear-input="true"></ion-input>
                       </ion-item>
+                      <img *ngIf="checkItemsPictureTaken[1]"[src]="base64Images[1]"/>
+                      <ion-button (click)="takePicture(1)" expand="block" fill="outline">
+                        <ion-icon name="camera" slot="start"></ion-icon>
+                        Take Photo
+                      </ion-button>
                     </ion-list>
               </ion-card-content>
             </ion-card>
@@ -99,13 +109,18 @@
                           <ion-checkbox slot="start"></ion-checkbox>
                         </ion-item>
                         <ion-item>
-                          <ion-label>Body work bent</ion-label>
+                          <ion-label>Bodywork bent</ion-label>
                           <ion-checkbox slot="start"></ion-checkbox>
                         </ion-item>
                         <ion-item>
                             <ion-label position="floating">Other</ion-label>
                             <ion-input placeholder="Please enter details" clear-input="true"></ion-input>
                         </ion-item>
+                        <img *ngIf="checkItemsPictureTaken[2]"[src]="base64Images[2]"/>
+                        <ion-button (click)="takePicture(2)" expand="block" fill="outline">
+                          <ion-icon name="camera" slot="start"></ion-icon>
+                          Take Photo
+                        </ion-button>
                       </ion-list>
                 </ion-card-content>
               </ion-card>
