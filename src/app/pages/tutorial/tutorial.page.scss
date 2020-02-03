@@ -16,16 +16,23 @@ p{
     margin: 40px;
 }
 
-ion-button {
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 5%;
-}
-
 .last-div{
     margin-top:30%;
 }
 
 * {
     font-size: 25px;
+}
+
+ion-title {
+    text-align: center;
+}
+
+ion-button {
+    font-size: 30px;
+    --padding-bottom: 30px;
+    --padding-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 5%;
 }
