@@ -1,0 +1,48 @@
+ion-toolbar {
+    --min-height:60px;
+}
+
+ion-title {
+    font-size: 25px;
+}
+
+p{
+    font-size:20px;
+    color: gray;
+    text-align: center;
+}
+
+.bigger{
+    font-size: 25px;
+}
+
+.container {
+    text-align: center;
+}
+
+img {
+    max-height: 3%;
+    max-width: 35%;
+    margin: 36px 0;
+}
+
+* {
+    text-align: center;
+}
+
+ion-button{
+    margin-bottom: 10%;
+    margin-left:20px;
+    margin-right:20px;
+    font-size: 30px;
+    --padding-bottom: 30px;
+    --padding-top: 30px;
+}
+
+h2{
+    font-size: 30px;
+}
+
+.truckWrapper{
+    margin-top:10%;
+}
