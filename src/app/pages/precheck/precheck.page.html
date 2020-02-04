@@ -5,13 +5,13 @@
             <ion-icon slot="icon-only" name="ios-battery-charging"></ion-icon>
           </ion-button>
         </ion-buttons>
-        <ion-title>Hi {{user.firstname}}</ion-title>
+        <ion-title>Pre-check</ion-title>
       </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-
+<!--
       <ion-card class="truck-card">
           <ion-card-header>
             <ion-card-subtitle>Today you are driving</ion-card-subtitle>
@@ -32,6 +32,11 @@
               </ion-list>
           </ion-card-content>
         </ion-card>
+      -->
+      <h2>{{truck.name}}</h2>
+      <div class="container">
+          <img id="truckImage" src="../../../assets/lifttruck.png"/>
+      </div>
 
         <ion-button (click)="goToOrders()" expand="block">Ready to go</ion-button>
 
@@ -58,7 +63,7 @@
                         <ion-label position="floating">Other</ion-label>
                         <ion-input placeholder="Please enter details" clear-input="true"></ion-input>
                     </ion-item>
-                    <img *ngIf="checkItemsPictureTaken[0]"[src]="base64Images[0]"/>
+                    <img class="defectImage" *ngIf="checkItemsPictureTaken[0]"[src]="base64Images[0]"/>
                     <ion-button (click)="takePicture(0)" expand="block" fill="outline">
                       <ion-icon name="camera" slot="start"></ion-icon>
                       Take Photo
@@ -90,7 +95,7 @@
                           <ion-label position="floating">Other</ion-label>
                           <ion-input placeholder="Please enter details" clear-input="true"></ion-input>
                       </ion-item>
-                      <img *ngIf="checkItemsPictureTaken[1]"[src]="base64Images[1]"/>
+                      <img class="defectImage" *ngIf="checkItemsPictureTaken[1]"[src]="base64Images[1]"/>
                       <ion-button (click)="takePicture(1)" expand="block" fill="outline">
                         <ion-icon name="camera" slot="start"></ion-icon>
                         Take Photo
@@ -118,7 +123,7 @@
                             <ion-label position="floating">Other</ion-label>
                             <ion-input placeholder="Please enter details" clear-input="true"></ion-input>
                         </ion-item>
-                        <img *ngIf="checkItemsPictureTaken[2]"[src]="base64Images[2]"/>
+                        <img class="defectImage" *ngIf="checkItemsPictureTaken[2]"[src]="base64Images[2]"/>
                         <ion-button (click)="takePicture(2)" expand="block" fill="outline">
                           <ion-icon name="camera" slot="start"></ion-icon>
                           Take Photo
@@ -135,6 +140,11 @@
                     <ion-card-content>
                         <ion-label position="floating">Comment</ion-label>
                         <ion-input placeholder="Please enter details" clear-input="true"></ion-input>
+                        <img class="defectImage" *ngIf="checkItemsPictureTaken[3]"[src]="base64Images[3]"/>
+                    <ion-button (click)="takePicture(3)" expand="block" fill="outline">
+                      <ion-icon name="camera" slot="start"></ion-icon>
+                      Take Photo
+                    </ion-button>
                     </ion-card-content>
                   </ion-card>
 </ion-content>

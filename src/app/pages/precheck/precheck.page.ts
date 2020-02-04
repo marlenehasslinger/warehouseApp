@@ -12,8 +12,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 export class PrecheckPage implements OnInit {
   user: user;
   truck: truck;
-  base64Images: string[] = ["", "", ""];
-  checkItemsPictureTaken: boolean[] = [false, false, false];
+  base64Images: string[] = ["", "", "", ""];
+  checkItemsPictureTaken: boolean[] = [false, false, false, false];
 
   forkImageTaken: boolean = false;
 

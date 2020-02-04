@@ -9,6 +9,27 @@ ion-title {
 p{
     font-size:50px;
     color: gray;
-    padding-top:40%;
+}
+
+ion-icon {
     text-align: center;
+    font-size: 150px;
+    margin-top: 10%;
+}
+
+* {
+    text-align: center;
+}
+
+ion-button {
+    font-size: 30px;
+    --padding-bottom: 30px;
+    --padding-top: 30px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#emergencyButton{
+    margin-top: 20%;
+
 }

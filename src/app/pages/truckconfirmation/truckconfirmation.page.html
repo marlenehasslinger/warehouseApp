@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="secondary">
+          <ion-button>
+            <ion-icon slot="icon-only" name="ios-battery-charging"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+    <ion-title>Hi {{user?.firstname}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="truckWrapper">
+    <p>Today you are driving</p>
+    <h2>{{truck?.name}}</h2>
+    <div class="container">
+      <img src="../../../assets/lifttruck.png" />
+    </div>
+  </div>
+  <p>Please complete the truck pre-check</p>
+  <ion-button (click)="goToPreCheck()" expand="block">Next</ion-button>
+</ion-content>
