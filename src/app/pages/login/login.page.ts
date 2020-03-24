@@ -94,7 +94,11 @@ export class LoginPage implements OnInit {
           this.truckService.setLoginTime();
           this.userService.getUserData(this.uid).subscribe(res => {
             this.userService.setUser(res);
+<<<<<<< HEAD
             this.router.navigateByUrl("truckconfirmation");
+=======
+            this.router.navigateByUrl("precheck");
+>>>>>>> b28c743810f8aaeddd559a4dc8e145fff11724d3
           });
         }
         loading.dismiss();
