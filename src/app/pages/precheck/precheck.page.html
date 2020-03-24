@@ -11,28 +11,6 @@
 
 
 <ion-content>
-<!--
-      <ion-card class="truck-card">
-          <ion-card-header>
-            <ion-card-subtitle>Today you are driving</ion-card-subtitle>
-            <ion-card-title>{{truck.name}}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>Please check the vehicle for the following defects:</p>
-            <ion-list>
-                <ion-item>
-                  <ion-label>Loud noises from the engine</ion-label>
-                </ion-item>
-                <ion-item>
-                  <ion-label>Damaged fork</ion-label>
-                </ion-item>
-                <ion-item>
-                  <ion-label>Damage to the bodywork</ion-label>
-                </ion-item>
-              </ion-list>
-          </ion-card-content>
-        </ion-card>
-      -->
       <h2>{{truck.name}}</h2>
       <div class="container">
           <img id="truckImage" src="../../../assets/lifttruck.png"/>
@@ -42,7 +20,6 @@
 
         <ion-card>
             <ion-item>
-                <ion-checkbox color="primary" slot="end"></ion-checkbox>
                 <ion-label class="custom-card-label">Engine</ion-label>
               </ion-item>
             <ion-card-content>
@@ -74,7 +51,6 @@
 
           <ion-card>
               <ion-item>
-                  <ion-checkbox color="primary" slot="end"></ion-checkbox>
                   <ion-label class="custom-card-label">Fork</ion-label>
                 </ion-item>
               <ion-card-content>
@@ -106,7 +82,6 @@
 
             <ion-card>
                 <ion-item>
-                    <ion-checkbox color="primary" slot="end"></ion-checkbox>
                     <ion-label class="custom-card-label">Bodywork</ion-label>
                   </ion-item>
                 <ion-card-content>
@@ -134,7 +109,6 @@
 
                 <ion-card>
                     <ion-item>
-                        <ion-checkbox color="primary" slot="end"></ion-checkbox>
                         <ion-label class="custom-card-label">Other</ion-label>
                       </ion-item>
                     <ion-card-content>

@@ -17,19 +17,53 @@ ion-icon {
     margin-top: 10%;
 }
 
-* {
-    text-align: center;
+ion-card {
+    font-size: 80px;
+    --color: white !important;
 }
 
 ion-button {
-    font-size: 30px;
-    --padding-bottom: 30px;
-    --padding-top: 30px;
+    font-size: 20px;
+    --padding-bottom: 10px;
+    --padding-top: 10px;
     margin-left: 15px;
     margin-right: 15px;
 }
 
-#emergencyButton{
-    margin-top: 20%;
+.container {
+    text-align: center;
+}
 
+.special-button {
+    width: 45%;
+}
+
+img{
+    width: 90%;
+}
+
+div {
+    width: 99%;
+    margin: 1%;
+}
+
+ion-col {
+    color: white;
+    //padding: 15px;
+}
+
+ion-item {
+    --background: #333333;
+
+}
+
+ion-list {
+    padding-top: 0;
+    padding-bottom: 0;
+    //margin-top: 8px;
+    //margin-bottom: 8px;
+}
+
+ion-card-content{
+    background-color: #222222;
 }

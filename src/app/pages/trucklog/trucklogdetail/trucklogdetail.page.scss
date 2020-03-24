@@ -11,3 +11,14 @@ ion-item {
 ion-toolbar {
     --min-height:60px;
 }
+
+ion-item {
+    --inner-padding-bottom: 15px;
+    --inner-padding-top: 15px;
+    --background: #444444;
+    color: white;
+}
+
+ion-list {
+    background-color: #444444;
+}

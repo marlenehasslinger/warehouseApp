@@ -4,9 +4,24 @@ ion-toolbar {
 
 * {
     font-size: 25px;
+    //color: white;
 }
 
 ion-item {
     --inner-padding-bottom: 15px;
     --inner-padding-top: 15px;
+    //--background: #444444;
+
+}
+
+ion-list {
+    background-color: #444444;
+    padding-top: 0;
+    padding-bottom: 0;
+
+}
+
+ion-item {
+    --background: #444444;
+    color: white;
 }

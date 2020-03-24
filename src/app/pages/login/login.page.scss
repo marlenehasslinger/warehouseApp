@@ -3,10 +3,17 @@ ion-header {
 }
 
 ion-content{
-    --background: #EFEFEF;
+    //--background: #EFEFEF;
     font-size: 25px;
     //--background: url(../../../assets/background.jpg) 0 0/100% 100% no-repeat;
 }
+
+/*
+@media screen and (min-height : 200px) and (max-height : 800px) {
+    .Landing-formContainer{
+        padding-top: 35px;
+    }
+}*/
 
 h1 {
     text-align: center;
@@ -26,7 +33,7 @@ ion-card {
     margin-top: 5%;
     margin-left: 15%;
     margin-right: 15%;
-    background-color: #f7f7f7;
+    background-color: #EFEFEF;
 }
 
 #pin-input {
