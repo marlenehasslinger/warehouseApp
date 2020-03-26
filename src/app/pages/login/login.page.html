@@ -26,10 +26,10 @@
                 Please enter a valid PIN.
             </div>
           </div>
+          <div>
+            <ion-checkbox color="primary" [(ngModel)]="form.tutorialChecked"></ion-checkbox>
+          </div>
           </ion-card-content>
       </ion-card>
-
-      <ion-button class="tutorialButton" (click)="goToTutorial()" expand="block" fill="outline">Tutorial</ion-button>
-
-
+      <!--<ion-button class="tutorialButton" (click)="goToTutorial()" expand="block" fill="outline">Tutorial</ion-button>-->
 </ion-content>

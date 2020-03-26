@@ -7,6 +7,7 @@ import { user, UserService } from 'src/app/services/user.service';
 import { auth } from 'firebase/app';
 import { LoadingController } from '@ionic/angular';
 import { TruckService } from 'src/app/services/truck.service';
+import { TutorialServiceService } from 'src/app/services/tutorial-service.service';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,9 @@ export class LoginPage implements OnInit {
   scannedCode: string = null;
   pinNotFound: boolean = false;
   uid: string;
+  public form = 
+    { tutorialChecked: true }
+  ;
 
   constructor(public userService: UserService,
     public afAuth: AngularFireAuth,
@@ -27,7 +31,8 @@ export class LoginPage implements OnInit {
     public barcodeScanner: BarcodeScanner,
     private router: Router,
     private loadingController: LoadingController,
-    private truckService:TruckService) {
+    private truckService:TruckService,
+    private tutorialService:TutorialServiceService) {
     this.myForm = this.formBuilder.group({
       pin: ['', Validators.required],
       });
@@ -60,6 +65,7 @@ export class LoginPage implements OnInit {
 
         this.userService.getUserData(this.uid).subscribe(res => {
           this.userService.setUser(res);
+          this.tutorialService.setServiceChecked(this.form.tutorialChecked)
           this.router.navigateByUrl("truckconfirmation");
         });
         
@@ -94,11 +100,7 @@ export class LoginPage implements OnInit {
           this.truckService.setLoginTime();
           this.userService.getUserData(this.uid).subscribe(res => {
             this.userService.setUser(res);
-<<<<<<< HEAD
             this.router.navigateByUrl("truckconfirmation");
-=======
-            this.router.navigateByUrl("precheck");
->>>>>>> b28c743810f8aaeddd559a4dc8e145fff11724d3
           });
         }
         loading.dismiss();
