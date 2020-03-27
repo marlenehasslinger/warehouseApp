@@ -21,8 +21,18 @@
           </div>
           <div id="login-button-container">
             <ion-button expand="block"[disabled]="pin.invalid" (click)="login()">Log in</ion-button>
-            <ion-checkbox color="primary" [(ngModel)]="form.tutorialChecked"></ion-checkbox>
-            <ion-label>Tutorial</ion-label>
+            <ion-grid>
+                <ion-row>
+                  <ion-col>
+                      <ion-checkbox color="primary" [(ngModel)]="form.scanTruckChecked"></ion-checkbox>
+                      <ion-label>Scan a truck</ion-label>
+                  </ion-col>
+                  <ion-col>
+                      <ion-checkbox color="primary" [(ngModel)]="form.tutorialChecked"></ion-checkbox>
+                      <ion-label>Tutorial</ion-label>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
             <div class="danger" *ngIf="pinNotFound">
                 Please enter a valid PIN.
             </div>

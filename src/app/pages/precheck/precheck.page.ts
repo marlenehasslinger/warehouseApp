@@ -46,7 +46,11 @@ export class PrecheckPage implements OnInit {
 
 
   goToOrders() {
-    this.router.navigateByUrl("menu");
+    if(this.user.manager){
+      this.router.navigateByUrl("menu");
+    } else {
+      this.router.navigateByUrl("orders");
+    }
   }
 
 }

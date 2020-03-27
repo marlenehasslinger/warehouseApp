@@ -28,10 +28,19 @@ export class TruckService {
   private timelogCollection: AngularFirestoreCollection<truckTimeLog>;
   private truck: truck;
   private timelogs: Observable<truckTimeLog[]>;
+  private truckScanned: boolean;
 
 
   constructor(private db: AngularFirestore) {
     this.truckCollection = db.collection<truck>('trucks');
+  }
+
+  setTruckScanned(truckScanned: boolean){
+    this.truckScanned = truckScanned;
+  }
+
+  getTruckScanned(){
+    return this.truckScanned;
   }
 
 
