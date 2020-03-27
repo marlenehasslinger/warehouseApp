@@ -78,7 +78,6 @@ export class TruckService {
       this.getTruckData(id).subscribe(res => {
         truck = res;
         let newDuration = truck.duration + differenceMins;
-        console.log("general duration: " + newDuration);
         this.truckCollection.doc(id).update({ duration: newDuration });
       });
     }
