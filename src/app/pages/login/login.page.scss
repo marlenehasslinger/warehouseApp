@@ -22,7 +22,7 @@ ion-card-title{
 ion-card {
    // text-align: center;
     width: 70%;
-    height: 370px;
+    height: 350px;
     margin-top: 5%;
     margin-left: 15%;
     margin-right: 15%;
@@ -60,8 +60,8 @@ ion-input {
 .danger {
     color: red;
     font-size: 25px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    //padding-top: 10px;
+    //padding-bottom: 10px;
 }
 
 #login-button-container {
@@ -83,6 +83,6 @@ ion-title {
 }
 
 ion-checkbox{
-    margin-top: 50px;
+    margin-top: 30px;
     margin-right: 10px;
 }

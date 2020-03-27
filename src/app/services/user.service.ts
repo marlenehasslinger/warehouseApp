@@ -16,7 +16,8 @@ export interface user {
   firstname: string,
   lastname: string,
   pin: string,
-  uid: string
+  uid: string,
+  manager: boolean
 }
 
 @Injectable({

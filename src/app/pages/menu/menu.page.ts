@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { UserService, user } from 'src/app/services/user.service';
 import { TruckService } from 'src/app/services/truck.service';
 
 @Component({
@@ -9,8 +9,15 @@ import { TruckService } from 'src/app/services/truck.service';
   styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage implements OnInit {
-
+  user: user;
   pages = [
+    {
+      title: 'Orders',
+      url: '/menu/orders'
+    },
+  ];
+
+  managerPages = [
     {
       title: 'Orders',
       url: '/menu/orders'
@@ -34,6 +41,10 @@ export class MenuPage implements OnInit {
   }
 
   ngOnInit() {
+    this.user = this.userService.getUser();
+    if(this.user.manager){
+      this.pages = this.managerPages;
+    }
   }
 
   logout(){
