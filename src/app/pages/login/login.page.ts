@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
   pinNotFound: boolean = false;
   uid: string;
   public form = 
-    { tutorialChecked: true }
+    { tutorialChecked: false }
   ;
 
   constructor(public userService: UserService,

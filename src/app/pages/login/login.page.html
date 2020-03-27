@@ -19,15 +19,13 @@
                   <ion-input formControlName="pin" required="true" name="pin" placeholder="Please enter your ID" autofocus="true" clear-input="true" maxlength="5"></ion-input>
               </form>
           </div>
-         
           <div id="login-button-container">
-            <ion-button expand="block"[disabled]="pin.invalid" (click)="login()" >Log in</ion-button>
+            <ion-button expand="block"[disabled]="pin.invalid" (click)="login()">Log in</ion-button>
+            <ion-checkbox color="primary" [(ngModel)]="form.tutorialChecked"></ion-checkbox>
+            <ion-label>Tutorial</ion-label>
             <div class="danger" *ngIf="pinNotFound">
                 Please enter a valid PIN.
             </div>
-          </div>
-          <div>
-            <ion-checkbox color="primary" [(ngModel)]="form.tutorialChecked"></ion-checkbox>
           </div>
           </ion-card-content>
       </ion-card>
