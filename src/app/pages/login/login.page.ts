@@ -7,7 +7,7 @@ import { user, UserService } from 'src/app/services/user.service';
 import { auth } from 'firebase/app';
 import { LoadingController } from '@ionic/angular';
 import { TruckService } from 'src/app/services/truck.service';
-import { TutorialServiceService } from 'src/app/services/tutorial-service.service';
+import { TutorialService } from 'src/app/services/tutorial.service';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private loadingController: LoadingController,
     private truckService:TruckService,
-    private tutorialService:TutorialServiceService) {
+    private tutorialService:TutorialService) {
     this.myForm = this.formBuilder.group({
       pin: ['', Validators.required],
       });
@@ -98,6 +98,7 @@ export class LoginPage implements OnInit {
           this.myForm.reset();
           this.userService.setLoginTime();
           this.truckService.setLoginTime();
+          this.tutorialService.setServiceChecked(this.form.tutorialChecked)
           this.userService.getUserData(this.uid).subscribe(res => {
             this.userService.setUser(res);
             this.router.navigateByUrl("truckconfirmation");

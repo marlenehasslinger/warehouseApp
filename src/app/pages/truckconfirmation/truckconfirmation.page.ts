@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { user, UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { TruckService, truck } from 'src/app/services/truck.service';
-import { TutorialServiceService } from 'src/app/services/tutorial-service.service';
+import { TutorialService } from 'src/app/services/tutorial.service';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -15,7 +15,7 @@ export class TruckconfirmationPage implements OnInit {
   user: user;
   tutorialChecked: boolean;
 
-  constructor(public userService: UserService, public router: Router, private truckService: TruckService, private tutorialService: TutorialServiceService, private alertController: AlertController) { }
+  constructor(public userService: UserService, public router: Router, private truckService: TruckService, private tutorialService: TutorialService, private alertController: AlertController) { }
 
   ngOnInit() {
     this.user = this.userService.getUser();
