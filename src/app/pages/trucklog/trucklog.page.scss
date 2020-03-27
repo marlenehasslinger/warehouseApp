@@ -3,7 +3,7 @@ ion-toolbar {
 }
 
 * {
-    font-size: 25px;
+    //font-size: 25px;
 }
 
 ion-item {
@@ -15,4 +15,13 @@ ion-item {
 
 ion-list {
     background-color: #444444;
+}
+
+ion-card {
+    --background: #444444;
+    --color: white;
+}
+
+ion-card-title{
+    --color: white;
 }
