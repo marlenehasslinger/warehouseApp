@@ -11,12 +11,6 @@ p{
     color: gray;
 }
 
-ion-icon {
-    text-align: center;
-    font-size: 150px;
-    margin-top: 10%;
-}
-
 ion-card {
     font-size: 80px;
     --color: white !important;
@@ -44,7 +38,6 @@ img{
 
 div {
     width: 99%;
-    margin: 1%;
 }
 
 ion-col {
@@ -66,4 +59,12 @@ ion-list {
 
 ion-card-content{
     background-color: #222222;
+}
+
+ion-icon {
+    align-self: center;
+    font-size: 70px;
+    height:70px;
+    margin-left:45%;
+    //margin-top: 10%;
 }

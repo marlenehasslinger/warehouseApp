@@ -25,12 +25,17 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+ion-title {
+    font-size: 25px;
+}
+
 ion-content {
     --background: #1d1d1d;
     --color: white !important;
 }
 
 ion-toolbar {
+    --min-height:60px;
     --background: #2c2c2c;
     --color: white !important;
 }

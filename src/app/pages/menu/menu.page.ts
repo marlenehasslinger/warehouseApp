@@ -23,7 +23,11 @@ export class MenuPage implements OnInit {
       url: '/menu/orders'
     },
     {
-      title: 'Employees',
+      title: 'Collisions',
+      url: '/menu/collisions'
+    },
+    {
+      title: 'Drivers',
       url: '/menu/userlog'
     },
     {

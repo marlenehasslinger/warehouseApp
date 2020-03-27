@@ -1,9 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button>
-
-      </ion-menu-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button color="danger" (click)="logout()">Log out</ion-button>
@@ -11,9 +9,8 @@
     <ion-title>Orders</ion-title>
   </ion-toolbar>
 </ion-header>
-
-
 <ion-content>
+  <!--<ion-icon name="ios-battery-full"></ion-icon>-->
   <ion-slides #mySlider pager="true" [options]="slideOpts" [pager]="false">
     <ion-slide>
       <div>

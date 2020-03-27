@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { MenuPage } from './menu.page';
 
 const routes: Routes = [
@@ -15,6 +14,10 @@ const routes: Routes = [
       {
         path: 'userlog',
         loadChildren: () => import('../userlog/userlog.module').then( m => m.UserlogPageModule)
+      },
+      {
+        path: 'collisions',
+        loadChildren: () => import('../collisions/collisions.module').then( m => m.CollisionsPageModule)
       },
       {
         path: 'trucklog',

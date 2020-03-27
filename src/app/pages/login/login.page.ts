@@ -8,7 +8,6 @@ import { auth } from 'firebase/app';
 import { LoadingController } from '@ionic/angular';
 import { TruckService } from 'src/app/services/truck.service';
 import { TutorialService } from 'src/app/services/tutorial.service';
-import { format } from 'path';
 
 @Component({
   selector: 'app-login',
@@ -74,8 +73,8 @@ export class LoginPage implements OnInit {
           });
         } else {
           this.truckService.setTruckScanned(this.form.scanTruckChecked);
-          
-          // delete 
+          // delete
+          /* 
           this.truckService.getTruckData("truck1").subscribe(res => {
             this.truckService.setTruck(res);
           })
@@ -87,8 +86,9 @@ export class LoginPage implements OnInit {
             this.tutorialService.setServiceChecked(this.form.tutorialChecked)
             this.router.navigateByUrl("truckconfirmation");
           });
+          */
           // until here
-          //this.scanCode();
+          this.scanCode();
 
         }
       }

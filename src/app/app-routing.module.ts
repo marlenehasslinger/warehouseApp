@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'truckconfirmation',
     loadChildren: () => import('./pages/truckconfirmation/truckconfirmation.module').then( m => m.TruckconfirmationPageModule)
   },
+  {
+    path: 'collisions',
+    loadChildren: () => import('./pages/collisions/collisions.module').then( m => m.CollisionsPageModule)
+  },
 ];
 
 @NgModule({
