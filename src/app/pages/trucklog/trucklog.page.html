@@ -15,9 +15,9 @@
             <ion-label (click)="navigateToTruckOverview(truck)">{{truck.name}}</ion-label>
         </ion-item>
     </ion-list>-->
-    <ion-searchbar animated showCancelButton="never"></ion-searchbar>
+    <ion-searchbar (ionInput)="search($event)" animated showCancelButton="never"></ion-searchbar>
     <ion-grid>
-        <ion-row>
+        <ion-row *ngIf="!searchClicked">
             <ion-col *ngFor="let truck of trucks" size="6">
                 <ion-card (click)="navigateToTruckOverview(truck)">
                     <ion-card-header>
@@ -34,5 +34,24 @@
                 </ion-card>
             </ion-col>
         </ion-row>
+
+        <ion-row *ngIf="searchClicked">
+                <ion-col *ngFor="let truck of resultArr" size="6">
+                    <ion-card (click)="navigateToTruckOverview(truck)">
+                        <ion-card-header>
+                            <ion-card-title>{{truck.name}}</ion-card-title>
+                        </ion-card-header>
+                        <ion-card-content>
+                            <ion-grid>
+                                <ion-row>
+                                    <ion-col>Daily Usage: 50%</ion-col>
+                                    <ion-col>Collisions today: 0</ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+
+            </ion-row>
     </ion-grid>
 </ion-content>
