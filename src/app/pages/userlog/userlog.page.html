@@ -11,14 +11,40 @@
 
 <ion-content>
     <ion-searchbar (ionInput)="search($event)" animated showCancelButton="never"></ion-searchbar>
-    <ion-list *ngIf="!searchClicked">
-        <ion-item *ngFor="let user of users">
-            <ion-label (click)="navigateToUserDetail(user)">{{user.firstname}} {{user.lastname}}</ion-label>
-        </ion-item>
-    </ion-list>
-    <ion-list *ngIf="searchClicked">
-        <ion-item *ngFor="let user of resultArr">
-            <ion-label (click)="navigateToUserDetail(user)">{{user.firstname}} {{user.lastname}}</ion-label>
-        </ion-item>
-    </ion-list>
+    <ion-grid>
+        <ion-row *ngIf="!searchClicked">
+            <ion-col *ngFor="let user of users" size="6">
+                <ion-card (click)="navigateToUserDetail(user)">
+                    <ion-card-header>
+                        <ion-card-title>{{user.firstname}} {{user.lastname}}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col>Hours today: 50%</ion-col>
+                                <ion-col>Collisions today: 0</ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="searchClicked">
+            <ion-col *ngFor="let user of resultArr" size="6">
+                <ion-card (click)="navigateToTruckOverview(truck)">
+                    <ion-card-header>
+                        <ion-card-title>{{user.firstname}} {{user.lastname}}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col>Hours today: 50%</ion-col>
+                                <ion-col>Collisions today: 3</ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

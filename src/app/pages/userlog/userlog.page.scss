@@ -3,7 +3,7 @@ ion-toolbar {
 }
 
 * {
-    font-size: 25px;
+    //font-size: 25px;
     //color: white;
 }
 
@@ -22,6 +22,17 @@ ion-list {
 }
 
 ion-item {
+    --inner-padding-bottom: 15px;
+    --inner-padding-top: 15px;
     --background: #444444;
     color: white;
+}
+
+ion-card {
+    --background: #4444;
+    --color: white;
+}
+
+ion-card-title{
+    --color: white;
 }
