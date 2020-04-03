@@ -23,7 +23,7 @@ export class TruckconfirmationPage implements OnInit {
     this.tutorialChecked = this.tutorialService.getServiceChecked();
 
     if(this.tutorialChecked){
-      this.presentAlertConfirm();
+      this.presentAlert();
     }
     
 
@@ -31,25 +31,12 @@ export class TruckconfirmationPage implements OnInit {
   }
   
 
-  async presentAlertConfirm() {
+  async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Confirm!',
-      message: 'This is the tutorial <3',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Okay',
-          handler: () => {
-            console.log('Confirm Okay');
-          }
-        }
-      ]
+      header: 'Daisy101',
+      subHeader: 'Hi - I am Daisy, and I am here to help you.',
+      message: 'Please use the following screen to confirm that we have registered you as driving the proper truck.',
+      buttons: ['OK']
     });
 
     await alert.present();
