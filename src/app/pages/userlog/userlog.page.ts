@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService, user } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { TutorialService } from 'src/app/services/tutorial.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-userlog',
@@ -11,18 +13,24 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class UserlogPage implements OnInit {
   users: user[];
   searchClicked:boolean = false;
+  tutorialChecked: boolean;
 
   //search results
   sampleArr=[];
   resultArr=[];
 
-  constructor(private userService: UserService, private router: Router, public fs: AngularFirestore) { }
+  constructor(private userService: UserService, private router: Router, public fs: AngularFirestore, private tutorialService: TutorialService, private alertController: AlertController) { }
 
   ngOnInit() {
     this.userService.getAllUsers().subscribe(res => {
       this.users = res;
       console.log(this.users);
     });
+
+    this.tutorialChecked = this.tutorialService.getServiceChecked();
+    if(this.tutorialChecked){
+      this.presentAlert();
+    }
   }
 
   navigateToUserDetail(user: user){
@@ -73,6 +81,16 @@ export class UserlogPage implements OnInit {
         }
       })
     
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Daisy101',
+      message: 'Welcome, Manager, to the \"Drivers\" screen where you can view all of your employees. Feel free to click on one to view more information.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
 }
