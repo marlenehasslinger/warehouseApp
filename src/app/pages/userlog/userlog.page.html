@@ -31,7 +31,7 @@
         </ion-row>
         <ion-row *ngIf="searchClicked">
             <ion-col *ngFor="let user of resultArr" size="6">
-                <ion-card (click)="navigateToTruckOverview(truck)">
+                <ion-card (click)="navigateToUserDetail(user)">
                     <ion-card-header>
                         <ion-card-title>{{user.firstname}} {{user.lastname}}</ion-card-title>
                     </ion-card-header>
