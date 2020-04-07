@@ -39,7 +39,7 @@ export class OrdersPage implements OnInit {
     this.slides.slideNext();
   }
 
-  constructor(public deviceMotion: DeviceMotion, private http: HTTP, private router: Router, private userService: UserService, private truckService: TruckService,  private tutorialService: TutorialService) {
+  constructor(public deviceMotion: DeviceMotion, private http: HTTP, private router: Router, private userService: UserService, private truckService: TruckService,  private tutorialService: TutorialService, private alertController: AlertController) {
     this.x = "-";
     this.y = "-";
     this.z = "-";
