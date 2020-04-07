@@ -10,6 +10,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion/ngx';
+import { HTTP } from '@ionic-native/http/ngx';
+import { File } from '@ionic-native/file/ngx';
+
 import firebaseConfig from './firebase';
 import { AngularFireModule } from '@angular/fire';
 import {AngularFireAuthModule } from '@angular/fire/auth';
@@ -32,8 +36,11 @@ import {AngularFirestoreModule } from '@angular/fire/firestore';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     BarcodeScanner,
-    Camera
-  ],
+    Camera,
+    DeviceMotion,
+    File,
+    HTTP
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
