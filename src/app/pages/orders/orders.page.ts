@@ -8,8 +8,8 @@ import { AlertController } from '@ionic/angular';
 import { DeviceMotion, DeviceMotionAccelerationData, DeviceMotionAccelerometerOptions } from '@ionic-native/device-motion/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
 
-const headers = {'Authorization':'Token AML0PF2bP6vI49uSsEPA01cj7QEsA5D2M2WHB_sW9iRyVENNqwjquofPeqHcjLJLHusYABT43TldbTW1ecc68g=='};
-const url ='https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/write?org=1d952de0da8a8fe4&bucket=Rocla&precision=ms';
+const headers = { 'Authorization': 'Token AML0PF2bP6vI49uSsEPA01cj7QEsA5D2M2WHB_sW9iRyVENNqwjquofPeqHcjLJLHusYABT43TldbTW1ecc68g==' };
+const url = 'https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/write?org=1d952de0da8a8fe4&bucket=Rocla&precision=ms';
 
 @Component({
   selector: 'app-orders',
@@ -18,8 +18,8 @@ const url ='https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/write?org=1d
 })
 
 export class OrdersPage implements OnInit {
-  @ViewChild('mySlider', null)  slides: IonSlides;
-  public form = { listeningStarted: false, listeningStopped: true};
+  @ViewChild('mySlider', null) slides: IonSlides;
+  public form = { listeningStarted: false, listeningStopped: true };
   x: string;
   y: string;
   z: string;
@@ -35,11 +35,11 @@ export class OrdersPage implements OnInit {
   startingIndex: number;
   tutorialChecked: boolean;
 
-  swipeNext(){
+  swipeNext() {
     this.slides.slideNext();
   }
 
-  constructor(public deviceMotion: DeviceMotion, private http: HTTP, private router: Router, private userService: UserService, private truckService: TruckService,  private tutorialService: TutorialService, private alertController: AlertController) {
+  constructor(public deviceMotion: DeviceMotion, private http: HTTP, private router: Router, private userService: UserService, private truckService: TruckService, private tutorialService: TutorialService, private alertController: AlertController) {
     this.x = "-";
     this.y = "-";
     this.z = "-";
@@ -52,9 +52,9 @@ export class OrdersPage implements OnInit {
 
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.tutorialChecked = this.tutorialService.getServiceChecked();
-    if(this.tutorialChecked){
+    if (this.tutorialChecked) {
       this.presentAlert();
     }
   }
@@ -78,14 +78,14 @@ export class OrdersPage implements OnInit {
     // Measurement is an important concept in InfluxDB. It can be considered as the table name.
 
     this.startingIndex = 0;
-    console.log('Starting index: '+this.startingIndex)
+    console.log('Starting index: ' + this.startingIndex)
     this.id = this.deviceMotion.watchAcceleration(option).subscribe((acceleration: DeviceMotionAccelerationData) => {
 
       // Use low pass filter to get the value of gravity in 3 axises and remove them from the value.
       // This method is recommended of Google Official Document: https://developer.android.com/reference/android/hardware/SensorEvent.html
-      this.gra_x = this.alpha * this.gra_x + (1-this.alpha) * acceleration.x;
-      this.gra_y = this.alpha * this.gra_y + (1-this.alpha) * acceleration.y;
-      this.gra_z = this.alpha * this.gra_z + (1-this.alpha) * acceleration.z;
+      this.gra_x = this.alpha * this.gra_x + (1 - this.alpha) * acceleration.x;
+      this.gra_y = this.alpha * this.gra_y + (1 - this.alpha) * acceleration.y;
+      this.gra_z = this.alpha * this.gra_z + (1 - this.alpha) * acceleration.z;
       // console.log('gravity: '+this.gra_x +' '+this.gra_y+' '+this.gra_z );
 
       this.x = "" + (acceleration.x - this.gra_x).toFixed(4);
@@ -95,7 +95,7 @@ export class OrdersPage implements OnInit {
 
       // One sample of the acceleration data to be sent to the influxdb. It follows the InfluxDB line protocol syntax:
       // https://docs.influxdata.com/influxdb/v1.7/write_protocols/line_protocol_tutorial/
-      this.log_to_write = String(this.measurement+',device=Android '+'x='+this.x+',y='+this.y+',z='+this.z+' '+this.timestamp+'\n'); // Line protocol string
+      this.log_to_write = String(this.measurement + ',device=Android ' + 'x=' + this.x + ',y=' + this.y + ',z=' + this.z + ' ' + this.timestamp + '\n'); // Line protocol string
       // Here we use variable outputData as a buffer to store the samples which will be sent to influxdb in the future.
       // In this way, we can achieve batch update and it can reduce the pressure brought by frequent http requests
       this.outputData += this.log_to_write;
@@ -105,58 +105,60 @@ export class OrdersPage implements OnInit {
       // Write the data to the influxDB in a batch style with 100 records. We can also set the limit higher such as 200 or more.
       // If the sampling period is 50ms, we send the data to influxdb every 5 second.
       // issaveData is a flag to indicate if we want to send the data to influxDB or now.
-      if(this.startingIndex >= 5 ) {
-            // We need send the data in plain text .
-            this.http.setHeader('*','Content-Type','plain/text');
-            this.http.setDataSerializer('utf8');
+      if (this.startingIndex >= 5) {
+        // We need send the data in plain text .
+        this.http.setHeader('*', 'Content-Type', 'plain/text');
+        this.http.setDataSerializer('utf8');
 
-            console.log('Sending data: '+Date.now());
-            // console.log('test');
-            this.http.post(url, this.outputData, headers )
-            .then(() => {
-              console.log('Finish sending data: '+Date.now())
-            })
-            .catch(error => {
-              console.log(error)
-            })
-            // Reset the index and buffer.
-            this.startingIndex = 0
-            this.outputData="";
+        console.log('Sending data: ' + Date.now());
+        // console.log('test');
+        this.http.post(url, this.outputData, headers)
+          .then(() => {
+            console.log('Finish sending data: ' + Date.now())
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        // Reset the index and buffer.
+        this.startingIndex = 0
+        this.outputData = "";
       }
 
     }
     );
   }
-  
-    stopListening() {
-      this.form.listeningStarted = false;
-      this.form.listeningStopped = true;
-      this.id.unsubscribe();
-      console.log("-----------STOP LISTENING-----------");
-      // If users presses the 'Stop Listening' button, we stop listening and flush the data from the buffer to influxdb.
-      if(this.outputData)
-      {
-        this.http.setHeader('*','Content-Type','plain/text');
-        this.http.setDataSerializer('utf8');
-        console.log('Sending data: '+Date.now());
-        this.http.post(url, this.outputData, headers )
+
+  stopListening() {
+    this.form.listeningStarted = false;
+    this.form.listeningStopped = true;
+    this.id.unsubscribe();
+    console.log("-----------STOP LISTENING-----------");
+    // If users presses the 'Stop Listening' button, we stop listening and flush the data from the buffer to influxdb.
+    if (this.outputData) {
+      this.http.setHeader('*', 'Content-Type', 'plain/text');
+      this.http.setDataSerializer('utf8');
+      console.log('Sending data: ' + Date.now());
+      this.http.post(url, this.outputData, headers)
         .then(() => {
-          console.log('Finish sending data: '+Date.now())
+          console.log('Finish sending data: ' + Date.now())
           this.startingIndex = 0;
-          this.outputData ='';
+          this.outputData = '';
         })
         .catch(error => {
           console.log(error)
         })
-      }
     }
+  }
 
-  logout(){
-    this.stopListening();
+  logout() {
+    console.log("entered logout");
+    if (!this.form.listeningStopped) {
+      this.stopListening();
+    }
     console.log("entered logout");
     this.router.navigateByUrl("login");
     this.userService.addTimeLog(new Date().getTime());
-    if(this.truckService.getTruckScanned){
+    if (this.truckService.getTruckScanned) {
       this.truckService.addTruckLog(this.userService.getUser(), new Date().getTime());
     }
     console.log("should have logged out");
@@ -172,7 +174,5 @@ export class OrdersPage implements OnInit {
 
     await alert.present();
   }
-
-
 
 }
