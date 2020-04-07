@@ -86,6 +86,7 @@ export class UserlogPage implements OnInit {
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Daisy101',
+      cssClass: "scaledAlert",
       message: 'Welcome, Manager, to the \"Drivers\" screen where you can view all of your employees. Feel free to click on one to view more information.',
       buttons: ['OK']
     });
