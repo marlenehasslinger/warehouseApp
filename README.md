@@ -1,3 +1,12 @@
+## Development
+
+
+To run the application in the browser with live reload upon change detection run `ionic serve` in the project folder.
+
+Please be aware that while developing in the browser on your computer, you cannot use the camera, devicemotion, or QR code scan.
+
+To use these native features, you need to deploy the app natively on either iOS or Android (see instructions below)
+
 ## Android deployment
 An Android development environment is needed. Instructions for the setup were referenced from https://ionicframework.com/docs/developing/android. Tested on Windows 10.
 
