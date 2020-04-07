@@ -24,7 +24,6 @@ export class UserlogPage implements OnInit {
   ngOnInit() {
     this.userService.getAllUsers().subscribe(res => {
       this.users = res;
-      console.log(this.users);
     });
 
     this.tutorialChecked = this.tutorialService.getServiceChecked();
@@ -34,18 +33,14 @@ export class UserlogPage implements OnInit {
   }
 
   navigateToUserDetail(user: user){
-    console.log("uid from userlog: "+ user.uid);
     //this.router.navigate(['userdetail', JSON.stringify(user)]);
     this.router.navigate(['/menu/userlog/userlogdetail/', user.uid]);
 
   }
 
   search(event){
-    console.log("entered search function");
     let searchKey:string=event.target.value;
-    console.log("searchKey: " + searchKey);
     let firstLetter=searchKey.toUpperCase();
-    console.log("firstLetter: " + firstLetter);
 
     if(searchKey.length==0){
       this.searchClicked = false;
@@ -56,27 +51,21 @@ export class UserlogPage implements OnInit {
     }
 
     if(this.sampleArr.length==0){
-      console.log("in sampleArr.length==0");
       this.fs.collection('users', ref => ref.where('searchIndex', '==', firstLetter)).snapshotChanges()
         .subscribe(data => {
           data.forEach(childData => {
-            console.log("childData: " + JSON.stringify(childData.payload.doc.data()));
             this.sampleArr.push(childData.payload.doc.data());
             this.resultArr.push(childData.payload.doc.data());
-            console.log("sampleArr: " + JSON.stringify(this.sampleArr));
           })
         })
     } 
-      console.log("in sampleArr.length!=0");
       this.resultArr=[];
       this.sampleArr.forEach(val=>{
         let name:string=val['firstname'];
         let n:string = name.toString().toUpperCase();
         if(n.startsWith(searchKey.toUpperCase())){
           if(true){
-            console.log("in true loop");
             this.resultArr.push(val);
-            console.log("resultArr: " + JSON.stringify(this.resultArr));
           }
         }
       })

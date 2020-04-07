@@ -23,7 +23,6 @@ export class TrucklogPage implements OnInit {
   ngOnInit() {
     this.truckService.getAllTrucks().subscribe(res => {
       this.trucks = res;
-      console.log(this.trucks);
     });
 
     this.tutorialChecked = this.tutorialService.getServiceChecked();
@@ -33,18 +32,14 @@ export class TrucklogPage implements OnInit {
   }
 
   navigateToTruckOverview(truck: truck) {
-    console.log("uid from trucklog: " + truck.id);
     this.router.navigate(['/menu/trucklog/truckoverview/', truck.id]);
 
   }
 
 
   search(event) {
-    console.log("entered search function");
     let searchKey: string = event.target.value;
-    console.log("searchKey: " + searchKey);
     let firstLetter = searchKey.toUpperCase();
-    console.log("firstLetter: " + firstLetter);
 
     if (searchKey.length == 0) {
       this.searchClicked = false;
@@ -55,27 +50,21 @@ export class TrucklogPage implements OnInit {
     }
 
     if (this.sampleArr.length == 0) {
-      console.log("in sampleArr.length==0");
       this.fs.collection('trucks', ref => ref.where('searchIndex', '==', firstLetter)).snapshotChanges()
         .subscribe(data => {
           data.forEach(childData => {
-            console.log("childData: " + JSON.stringify(childData.payload.doc.data()));
             this.sampleArr.push(childData.payload.doc.data());
             this.resultArr.push(childData.payload.doc.data());
-            console.log("sampleArr: " + JSON.stringify(this.sampleArr));
           })
         })
     }
-    console.log("in sampleArr.length!=0");
     this.resultArr = [];
     this.sampleArr.forEach(val => {
       let name: string = val['name'];
       let n: string = name.toString().toUpperCase();
       if (n.startsWith(searchKey.toUpperCase())) {
         if (true) {
-          console.log("in true loop");
           this.resultArr.push(val);
-          console.log("resultArr: " + JSON.stringify(this.resultArr));
         }
       }
     })
