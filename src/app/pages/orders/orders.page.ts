@@ -3,6 +3,8 @@ import { IonSlides } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { TruckService } from 'src/app/services/truck.service';
+import { TutorialService } from 'src/app/services/tutorial.service';
+import { AlertController } from '@ionic/angular';
 import { DeviceMotion, DeviceMotionAccelerationData, DeviceMotionAccelerometerOptions } from '@ionic-native/device-motion/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
 
@@ -31,12 +33,13 @@ export class OrdersPage implements OnInit {
   gra_z: number;
   alpha: number;
   startingIndex: number;
+  tutorialChecked: boolean;
 
   swipeNext(){
     this.slides.slideNext();
   }
 
-  constructor(public deviceMotion: DeviceMotion, private http: HTTP, private router: Router, private userService: UserService, private truckService: TruckService) {
+  constructor(public deviceMotion: DeviceMotion, private http: HTTP, private router: Router, private userService: UserService, private truckService: TruckService,  private tutorialService: TutorialService) {
     this.x = "-";
     this.y = "-";
     this.z = "-";
@@ -49,7 +52,12 @@ export class OrdersPage implements OnInit {
 
   }
 
-  ngOnInit() {}
+  ngOnInit() { 
+    this.tutorialChecked = this.tutorialService.getServiceChecked();
+    if(this.tutorialChecked){
+      this.presentAlert();
+    }
+  }
 
   async startListening() {
     this.form.listeningStarted = true;
@@ -153,5 +161,18 @@ export class OrdersPage implements OnInit {
     }
     console.log("should have logged out");
   }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Daisy101',
+      cssClass: "scaledAlert",
+      message: '<h6>Starting the Truck</h6> <img src="../../../assets/Daisy_Tutorial2.gif"/> <p style="font-size:small;">Video courtesy of Nissan</p <p>Once you have confirmed that it is safe to drive your Rocla forklift, please confirm that the select lever is placed in neutral position and the parking brake is set, as shown above. Then, insert the key into the keyswitch and start the engine. You may view your tasks above, alongside the current map of AGVs.</p>',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+
 
 }

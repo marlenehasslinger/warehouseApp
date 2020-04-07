@@ -13,7 +13,7 @@
   <!--<ion-icon name="ios-battery-full"></ion-icon>-->
   <ion-button class="listening" (click)="startListening()" color="medium" [disabled]="form.listeningStarted" class="special-button" expand="default">Start Listening</ion-button>
   <ion-button class="listening" (click)="stopListening()" color="medium" [disabled]="form.listeningStopped" class="special-button" expand="default">Stop Listening</ion-button>
-  <ion-slides #mySlider pager="true" [options]="slideOpts" [pager]="false">
+  <ion-slides #mySlider pager="true" [pager]="false">
     <ion-slide>
       <div>
         <ion-card>
@@ -228,7 +228,7 @@
 
   <ion-button expand="block" (click)="swipeNext()">Done</ion-button>
   <div class="container">
-    <img src="../../../assets/map.png" />
+    <img src="../../../assets/WarehouseMap_new.gif" />
     <ion-button class="special-button" color="danger" expand="default">Emergency</ion-button>
     <ion-button class="special-button" color="medium" expand="default">Report </ion-button>
   </div>

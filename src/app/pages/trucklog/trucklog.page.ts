@@ -1,8 +1,9 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { TruckService, truck } from 'src/app/services/truck.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { TutorialService } from 'src/app/services/tutorial.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-trucklog',
@@ -12,17 +13,23 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class TrucklogPage implements OnInit {
   trucks: truck[];
   searchClicked: boolean = false;
+  tutorialChecked: boolean;
   //search results
   sampleArr = [];
   resultArr = [];
 
-  constructor(private truckService: TruckService, private router: Router, public fs: AngularFirestore) { }
+  constructor(private truckService: TruckService, private router: Router, public fs: AngularFirestore, private tutorialService: TutorialService, private alertController: AlertController) { }
 
   ngOnInit() {
     this.truckService.getAllTrucks().subscribe(res => {
       this.trucks = res;
       console.log(this.trucks);
     });
+
+    this.tutorialChecked = this.tutorialService.getServiceChecked();
+    if(this.tutorialChecked){
+      this.presentAlert();
+    }
   }
 
   navigateToTruckOverview(truck: truck) {
@@ -72,8 +79,17 @@ export class TrucklogPage implements OnInit {
         }
       }
     })
-
   }
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Daisy101',
+      cssClass: "scaledAlert",
+      message: 'Welcome, Manager, to the \"Trucks\" screen where you can view all of your trucks and see information like usage and collisions.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
 
 }
