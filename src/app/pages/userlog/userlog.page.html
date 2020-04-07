@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-searchbar (ionInput)="search($event)" animated showCancelButton="never"></ion-searchbar>
+    <ion-searchbar (ionInput)="search($event)" color="medium" animated showCancelButton="never"></ion-searchbar>
     <ion-grid>
         <ion-row *ngIf="!searchClicked">
             <ion-col *ngFor="let user of users" size="6">
