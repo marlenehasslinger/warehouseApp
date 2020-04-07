@@ -11,6 +11,8 @@
 </ion-header>
 <ion-content>
   <!--<ion-icon name="ios-battery-full"></ion-icon>-->
+  <ion-button class="listening" (click)="startListening()" color="medium" [disabled]="form.listeningStarted" class="special-button" expand="default">Start Listening</ion-button>
+  <ion-button class="listening" (click)="stopListening()" color="medium" [disabled]="form.listeningStopped" class="special-button" expand="default">Stop Listening</ion-button>
   <ion-slides #mySlider pager="true" [options]="slideOpts" [pager]="false">
     <ion-slide>
       <div>
