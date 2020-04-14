@@ -37,8 +37,6 @@ export class UserService {
   }
 
   // User data
-
-
   setUser(user: user) {
     this.user = user;
   }

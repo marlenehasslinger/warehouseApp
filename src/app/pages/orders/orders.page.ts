@@ -19,7 +19,10 @@ const url = 'https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/write?org=1
 
 export class OrdersPage implements OnInit {
   @ViewChild('mySlider', null) slides: IonSlides;
-  public form = { listeningStarted: false, listeningStopped: true };
+  public form = {
+    listeningStarted: false,
+    listeningStopped: true
+  };
   x: string;
   y: string;
   z: string;

@@ -12,12 +12,12 @@ import { AlertController } from '@ionic/angular';
 })
 export class UserlogPage implements OnInit {
   users: user[];
-  searchClicked:boolean = false;
+  searchClicked: boolean = false;
   tutorialChecked: boolean;
 
   //search results
-  sampleArr=[];
-  resultArr=[];
+  sampleArr = [];
+  resultArr = [];
 
   constructor(private userService: UserService, private router: Router, public fs: AngularFirestore, private tutorialService: TutorialService, private alertController: AlertController) { }
 
@@ -27,30 +27,30 @@ export class UserlogPage implements OnInit {
     });
 
     this.tutorialChecked = this.tutorialService.getServiceChecked();
-    if(this.tutorialChecked){
+    if (this.tutorialChecked) {
       this.presentAlert();
     }
   }
 
-  navigateToUserDetail(user: user){
+  navigateToUserDetail(user: user) {
     //this.router.navigate(['userdetail', JSON.stringify(user)]);
     this.router.navigate(['/menu/userlog/userlogdetail/', user.uid]);
 
   }
 
-  search(event){
-    let searchKey:string=event.target.value;
-    let firstLetter=searchKey.toUpperCase();
+  search(event) {
+    let searchKey: string = event.target.value;
+    let firstLetter = searchKey.toUpperCase();
 
-    if(searchKey.length==0){
+    if (searchKey.length == 0) {
       this.searchClicked = false;
-      this.sampleArr=[];
-      this.resultArr=[];
+      this.sampleArr = [];
+      this.resultArr = [];
     } else {
       this.searchClicked = true;
     }
 
-    if(this.sampleArr.length==0){
+    if (this.sampleArr.length == 0) {
       this.fs.collection('users', ref => ref.where('searchIndex', '==', firstLetter)).snapshotChanges()
         .subscribe(data => {
           data.forEach(childData => {
@@ -58,18 +58,18 @@ export class UserlogPage implements OnInit {
             this.resultArr.push(childData.payload.doc.data());
           })
         })
-    } 
-      this.resultArr=[];
-      this.sampleArr.forEach(val=>{
-        let name:string=val['firstname'];
-        let n:string = name.toString().toUpperCase();
-        if(n.startsWith(searchKey.toUpperCase())){
-          if(true){
-            this.resultArr.push(val);
-          }
+    }
+    this.resultArr = [];
+    this.sampleArr.forEach(val => {
+      let name: string = val['firstname'];
+      let n: string = name.toString().toUpperCase();
+      if (n.startsWith(searchKey.toUpperCase())) {
+        if (true) {
+          this.resultArr.push(val);
         }
-      })
-    
+      }
+    })
+
   }
 
   async presentAlert() {

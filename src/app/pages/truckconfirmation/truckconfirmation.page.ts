@@ -22,14 +22,13 @@ export class TruckconfirmationPage implements OnInit {
     this.truck = this.truckService.getTruck();
     this.tutorialChecked = this.tutorialService.getServiceChecked();
 
-    if(this.tutorialChecked){
+    if (this.tutorialChecked) {
       this.presentAlert();
     }
-    
 
     console.log(this.truck);
   }
-  
+
 
   async presentAlert() {
     const alert = await this.alertController.create({

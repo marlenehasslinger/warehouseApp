@@ -21,25 +21,25 @@ export class PrecheckPage implements OnInit {
   forkImageTaken: boolean = false;
 
   constructor(private camera: Camera, public userService: UserService, public router: Router, private truckService: TruckService, private tutorialService: TutorialService, private alertController: AlertController) { }
-    
-    takePicture(position){
-      const options: CameraOptions = {
-        quality: 100,
-        destinationType: this.camera.DestinationType.DATA_URL,
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE
-    }
-    
-      this.camera.getPicture(options).then((imageData) => {
-        // imageData is either a base64 encoded string or a file URI
-        // If it's base64 (DATA_URL):
-        this.base64Images[position] = 'data:image/jpeg;base64,' + imageData;
-        this.checkItemsPictureTaken[position] = true;
 
-        }, (err) => {
-        // Handle error
-        });
+  takePicture(position) {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
     }
+
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      this.base64Images[position] = 'data:image/jpeg;base64,' + imageData;
+      this.checkItemsPictureTaken[position] = true;
+
+    }, (err) => {
+      // Handle error
+    });
+  }
 
   ngOnInit() {
     this.user = this.userService.getUser();
@@ -47,14 +47,14 @@ export class PrecheckPage implements OnInit {
     this.tutorialChecked = this.tutorialService.getServiceChecked();
     console.log(this.truck);
 
-    if(this.tutorialChecked){
+    if (this.tutorialChecked) {
       this.presentAlert();
     }
   }
 
 
   goToOrders() {
-    if(this.user.manager){
+    if (this.user.manager) {
       this.router.navigateByUrl("menu");
     } else {
       this.router.navigateByUrl("orders");
