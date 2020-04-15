@@ -6,18 +6,18 @@ import { TruckService } from './truck.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 export interface timeLog {
-  date: number,
-  duration: number,
-  truck: string
+  date: number;
+  duration: number;
+  truck: string;
 
 }
 
 export interface user {
-  firstname: string,
-  lastname: string,
-  pin: string,
-  uid: string,
-  manager: boolean
+  firstname: string;
+  lastname: string;
+  pin: string;
+  uid: string;
+  manager: boolean;
 }
 
 @Injectable({
@@ -29,7 +29,7 @@ export class UserService {
   private timelogCollection: AngularFirestoreCollection<timeLog>;
   private timelogs: Observable<timeLog[]>;
   private loginTime: number;
-  private users:Observable<user[]>;
+  private users: Observable<user[]>;
 
   constructor(private db: AngularFirestore, public truckService: TruckService, public afAuth: AngularFireAuth) {
     this.userCollection = db.collection<user>('users');
@@ -54,7 +54,7 @@ export class UserService {
   }
 
   getUserData(id: string) {
-    //Initialize timelogCollection here because id is needed, which couldnt be provided in constructor
+    // Initialize timelogCollection here because id is needed, which couldnt be provided in constructor
     this.timelogCollection = this.userCollection.doc(id).collection<timeLog>('timelogs');
 
     return this.userCollection.doc<user>(id).valueChanges();
@@ -98,17 +98,17 @@ export class UserService {
 
   addTimeLog(time: number) {
     // calculate time difference between login and logout
-    if(this.loginTime){
-    let differenceMs = time - this.loginTime;
-    console.log("logintime from user service: " + this.loginTime);
-    let differenceMins = Math.round(((differenceMs % 86400000) % 3600000) / 60000) // minutes
-    differenceMins == 0? differenceMins = 1:differenceMins=differenceMins;
+    if (this.loginTime) {
+    const differenceMs = time - this.loginTime;
+    console.log('logintime from user service: ' + this.loginTime);
+    let differenceMins = Math.round(((differenceMs % 86400000) % 3600000) / 60000); // minutes
+    differenceMins == 0 ? differenceMins = 1 : differenceMins = differenceMins;
 
-    let newtimeLog: timeLog = {
+    const newtimeLog: timeLog = {
       truck: this.truckService.getTruck().name,
       date: time,
       duration: differenceMins
-    }
+    };
 
     this.timelogCollection.add(newtimeLog);
     }

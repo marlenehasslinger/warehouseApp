@@ -15,7 +15,7 @@ export class UserlogdetailPage implements OnInit {
   constructor(private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    let uid = this.route.snapshot.params['user'];
+    const uid = this.route.snapshot.params.user;
     console.log(uid);
 
     this.userService.getUserData(uid).subscribe(res => {

@@ -13,8 +13,8 @@ export class TutorialPage implements OnInit {
   ngOnInit() {
   }
 
-  goToLogin(){
-    this.router.navigateByUrl("login");
+  goToLogin() {
+    this.router.navigateByUrl('login');
   }
 
 }

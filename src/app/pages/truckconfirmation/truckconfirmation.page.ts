@@ -33,7 +33,7 @@ export class TruckconfirmationPage implements OnInit {
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Daisy101',
-      cssClass: "scaledAlert",
+      cssClass: 'scaledAlert',
       subHeader: 'Hi - I am Daisy, and I am here to help you.',
       message: 'Please use the following screen to confirm that we have registered you as driving the proper truck.',
       buttons: ['OK']
@@ -44,7 +44,7 @@ export class TruckconfirmationPage implements OnInit {
 
 
   goToPreCheck() {
-    this.router.navigateByUrl("precheck");
+    this.router.navigateByUrl('precheck');
   }
 
 }

@@ -41,24 +41,24 @@ export class MenuPage implements OnInit {
   constructor(private router: Router, private userService: UserService, private truckService: TruckService) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedPath = event.url;
-    })
+    });
   }
 
   ngOnInit() {
     this.user = this.userService.getUser();
-    if(this.user.manager){
+    if (this.user.manager) {
       this.pages = this.managerPages;
     }
   }
 
-  logout(){
-    console.log("entered logout");
-    this.router.navigateByUrl("login");
+  logout() {
+    console.log('entered logout');
+    this.router.navigateByUrl('login');
     this.userService.addTimeLog(new Date().getTime());
-    if(this.truckService.getTruckScanned){
+    if (this.truckService.getTruckScanned) {
       this.truckService.addTruckLog(this.userService.getUser(), new Date().getTime());
     }
-    console.log("should have logged out");
+    console.log('should have logged out');
   }
 
 }

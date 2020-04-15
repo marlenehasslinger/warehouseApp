@@ -8,12 +8,12 @@ export class TutorialService {
 
   constructor() { }
 
-  setServiceChecked(isChecked: boolean){
+  setServiceChecked(isChecked: boolean) {
     this.tutorialChecked = isChecked;
-    console.log("tutorial: " + this.tutorialChecked);
+    console.log('tutorial: ' + this.tutorialChecked);
   }
 
-  getServiceChecked(){
+  getServiceChecked() {
     return this.tutorialChecked;
   }
 
