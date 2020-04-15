@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import { TruckService, truck } from 'src/app/services/truck.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { TutorialService } from 'src/app/services/tutorial.service';
@@ -12,9 +12,9 @@ import { AlertController } from '@ionic/angular';
 })
 export class TrucklogPage implements OnInit {
   trucks: truck[];
-  searchClicked: boolean = false;
+  searchClicked = false;
   tutorialChecked: boolean;
-  //search results
+  // search results
   sampleArr = [];
   resultArr = [];
 
@@ -26,7 +26,7 @@ export class TrucklogPage implements OnInit {
     });
 
     this.tutorialChecked = this.tutorialService.getServiceChecked();
-    if(this.tutorialChecked){
+    if (this.tutorialChecked) {
       this.presentAlert();
     }
   }
@@ -38,8 +38,8 @@ export class TrucklogPage implements OnInit {
 
 
   search(event) {
-    let searchKey: string = event.target.value;
-    let firstLetter = searchKey.toUpperCase();
+    const searchKey: string = event.target.value;
+    const firstLetter = searchKey.toUpperCase();
 
     if (searchKey.length == 0) {
       this.searchClicked = false;
@@ -55,25 +55,25 @@ export class TrucklogPage implements OnInit {
           data.forEach(childData => {
             this.sampleArr.push(childData.payload.doc.data());
             this.resultArr.push(childData.payload.doc.data());
-          })
-        })
+          });
+        });
     }
     this.resultArr = [];
     this.sampleArr.forEach(val => {
-      let name: string = val['name'];
-      let n: string = name.toString().toUpperCase();
+      const name: string = val.name;
+      const n: string = name.toString().toUpperCase();
       if (n.startsWith(searchKey.toUpperCase())) {
         if (true) {
           this.resultArr.push(val);
         }
       }
-    })
+    });
   }
 
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Daisy101',
-      cssClass: "scaledAlert",
+      cssClass: 'scaledAlert',
       message: 'Welcome, Manager, to the \"Trucks\" screen where you can view all of your trucks and see information like usage and collisions.',
       buttons: ['OK']
     });

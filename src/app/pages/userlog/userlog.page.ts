@@ -12,10 +12,10 @@ import { AlertController } from '@ionic/angular';
 })
 export class UserlogPage implements OnInit {
   users: user[];
-  searchClicked: boolean = false;
+  searchClicked = false;
   tutorialChecked: boolean;
 
-  //search results
+  // search results
   sampleArr = [];
   resultArr = [];
 
@@ -33,14 +33,14 @@ export class UserlogPage implements OnInit {
   }
 
   navigateToUserDetail(user: user) {
-    //this.router.navigate(['userdetail', JSON.stringify(user)]);
+    // this.router.navigate(['userdetail', JSON.stringify(user)]);
     this.router.navigate(['/menu/userlog/userlogdetail/', user.uid]);
 
   }
 
   search(event) {
-    let searchKey: string = event.target.value;
-    let firstLetter = searchKey.toUpperCase();
+    const searchKey: string = event.target.value;
+    const firstLetter = searchKey.toUpperCase();
 
     if (searchKey.length == 0) {
       this.searchClicked = false;
@@ -56,26 +56,26 @@ export class UserlogPage implements OnInit {
           data.forEach(childData => {
             this.sampleArr.push(childData.payload.doc.data());
             this.resultArr.push(childData.payload.doc.data());
-          })
-        })
+          });
+        });
     }
     this.resultArr = [];
     this.sampleArr.forEach(val => {
-      let name: string = val['firstname'];
-      let n: string = name.toString().toUpperCase();
+      const name: string = val.firstname;
+      const n: string = name.toString().toUpperCase();
       if (n.startsWith(searchKey.toUpperCase())) {
         if (true) {
           this.resultArr.push(val);
         }
       }
-    })
+    });
 
   }
 
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Daisy101',
-      cssClass: "scaledAlert",
+      cssClass: 'scaledAlert',
       message: 'Welcome, Manager, to the \"Drivers\" screen where you can view all of your employees. Feel free to click on one to view more information.',
       buttons: ['OK']
     });

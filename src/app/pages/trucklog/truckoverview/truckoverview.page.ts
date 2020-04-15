@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import { TruckService, truck } from 'src/app/services/truck.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class TruckoverviewPage implements OnInit {
   constructor(private truckService: TruckService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    let id = this.route.snapshot.params['truck'];
+    const id = this.route.snapshot.params.truck;
     console.log(id);
 
     this.truckService.getTruckData(id).subscribe(res => {
@@ -24,7 +24,7 @@ export class TruckoverviewPage implements OnInit {
   }
 
   navigateToTruckDetail() {
-    console.log("uid from trucklog: " + this.truck.id);
+    console.log('uid from trucklog: ' + this.truck.id);
     this.router.navigate(['/menu/trucklog/trucklogdetail/', this.truck.id]);
 
   }

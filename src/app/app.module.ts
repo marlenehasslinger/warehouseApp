@@ -29,7 +29,7 @@ import {AngularFirestoreModule } from '@angular/fire/firestore';
     AngularFirestoreModule,
     IonicModule.forRoot({
       scrollPadding: false,
-      scrollAssist: true, 
+      scrollAssist: true,
   }), AppRoutingModule],
   providers: [
     StatusBar,

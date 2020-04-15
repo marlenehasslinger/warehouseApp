@@ -8,7 +8,7 @@ import { AlertController } from '@ionic/angular';
 import { DeviceMotion, DeviceMotionAccelerationData, DeviceMotionAccelerometerOptions } from '@ionic-native/device-motion/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
 
-const headers = { 'Authorization': 'Token AML0PF2bP6vI49uSsEPA01cj7QEsA5D2M2WHB_sW9iRyVENNqwjquofPeqHcjLJLHusYABT43TldbTW1ecc68g==' };
+const headers = { Authorization: 'Token AML0PF2bP6vI49uSsEPA01cj7QEsA5D2M2WHB_sW9iRyVENNqwjquofPeqHcjLJLHusYABT43TldbTW1ecc68g==' };
 const url = 'https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/write?org=1d952de0da8a8fe4&bucket=Rocla&precision=ms';
 
 @Component({
@@ -43,9 +43,9 @@ export class OrdersPage implements OnInit {
   }
 
   constructor(public deviceMotion: DeviceMotion, private http: HTTP, private router: Router, private userService: UserService, private truckService: TruckService, private tutorialService: TutorialService, private alertController: AlertController) {
-    this.x = "-";
-    this.y = "-";
-    this.z = "-";
+    this.x = '-';
+    this.y = '-';
+    this.z = '-';
     this.outputData = '';
     this.alpha = 0.8;
     this.gra_x = 0;
@@ -68,12 +68,11 @@ export class OrdersPage implements OnInit {
     // There is a bug when pressing the startListening button twice.
     // So we use variable listeningFlag to know if startListening is pressed before.
     // If so, we exit the function otherwise we proceed.
-    console.log("-----------BEGIN LISTENING-----------");
-    var option: DeviceMotionAccelerometerOptions =
-    {
-      //This is the polling frequency. It is measured in ms.
-      //However, the data is not polling exactly in the defined frequency.
-      //The actual sampling frequency will be lower than the defined frequency due to the delay.
+    console.log('-----------BEGIN LISTENING-----------');
+    const option: DeviceMotionAccelerometerOptions = {
+      // This is the polling frequency. It is measured in ms.
+      // However, the data is not polling exactly in the defined frequency.
+      // The actual sampling frequency will be lower than the defined frequency due to the delay.
       frequency: 50
     };
 
@@ -81,7 +80,7 @@ export class OrdersPage implements OnInit {
     // Measurement is an important concept in InfluxDB. It can be considered as the table name.
 
     this.startingIndex = 0;
-    console.log('Starting index: ' + this.startingIndex)
+    console.log('Starting index: ' + this.startingIndex);
     this.id = this.deviceMotion.watchAcceleration(option).subscribe((acceleration: DeviceMotionAccelerationData) => {
 
       // Use low pass filter to get the value of gravity in 3 axises and remove them from the value.
@@ -91,9 +90,9 @@ export class OrdersPage implements OnInit {
       this.gra_z = this.alpha * this.gra_z + (1 - this.alpha) * acceleration.z;
       // console.log('gravity: '+this.gra_x +' '+this.gra_y+' '+this.gra_z );
 
-      this.x = "" + (acceleration.x - this.gra_x).toFixed(4);
-      this.y = "" + (acceleration.y - this.gra_y).toFixed(4);
-      this.z = "" + (acceleration.z - this.gra_z).toFixed(4);
+      this.x = '' + (acceleration.x - this.gra_x).toFixed(4);
+      this.y = '' + (acceleration.y - this.gra_y).toFixed(4);
+      this.z = '' + (acceleration.z - this.gra_z).toFixed(4);
       this.timestamp = acceleration.timestamp.toFixed(0);
 
       // One sample of the acceleration data to be sent to the influxdb. It follows the InfluxDB line protocol syntax:
@@ -117,14 +116,14 @@ export class OrdersPage implements OnInit {
         // console.log('test');
         this.http.post(url, this.outputData, headers)
           .then(() => {
-            console.log('Finish sending data: ' + Date.now())
+            console.log('Finish sending data: ' + Date.now());
           })
           .catch(error => {
-            console.log(error)
-          })
+            console.log(error);
+          });
         // Reset the index and buffer.
-        this.startingIndex = 0
-        this.outputData = "";
+        this.startingIndex = 0;
+        this.outputData = '';
       }
 
     }
@@ -135,7 +134,7 @@ export class OrdersPage implements OnInit {
     this.form.listeningStarted = false;
     this.form.listeningStopped = true;
     this.id.unsubscribe();
-    console.log("-----------STOP LISTENING-----------");
+    console.log('-----------STOP LISTENING-----------');
     // If users presses the 'Stop Listening' button, we stop listening and flush the data from the buffer to influxdb.
     if (this.outputData) {
       this.http.setHeader('*', 'Content-Type', 'plain/text');
@@ -143,34 +142,34 @@ export class OrdersPage implements OnInit {
       console.log('Sending data: ' + Date.now());
       this.http.post(url, this.outputData, headers)
         .then(() => {
-          console.log('Finish sending data: ' + Date.now())
+          console.log('Finish sending data: ' + Date.now());
           this.startingIndex = 0;
           this.outputData = '';
         })
         .catch(error => {
-          console.log(error)
-        })
+          console.log(error);
+        });
     }
   }
 
   logout() {
-    console.log("entered logout");
+    console.log('entered logout');
     if (!this.form.listeningStopped) {
       this.stopListening();
     }
-    console.log("entered logout");
-    this.router.navigateByUrl("login");
+    console.log('entered logout');
+    this.router.navigateByUrl('login');
     this.userService.addTimeLog(new Date().getTime());
     if (this.truckService.getTruckScanned) {
       this.truckService.addTruckLog(this.userService.getUser(), new Date().getTime());
     }
-    console.log("should have logged out");
+    console.log('should have logged out');
   }
 
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Daisy101',
-      cssClass: "scaledAlert",
+      cssClass: 'scaledAlert',
       message: '<h6>Starting the Truck</h6> <img src="../../../assets/Daisy_Tutorial2.gif"/> <p style="font-size:small;">Video courtesy of Nissan</p <p>Once you have confirmed that it is safe to drive your Rocla forklift, please confirm that the select lever is placed in neutral position and the parking brake is set, as shown above. Then, insert the key into the keyswitch and start the engine. You may view your tasks above, alongside the current map of AGVs.</p>',
       buttons: ['OK']
     });

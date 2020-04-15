@@ -15,10 +15,10 @@ export class PrecheckPage implements OnInit {
   user: user;
   truck: truck;
   tutorialChecked: boolean;
-  base64Images: string[] = ["", "", "", ""];
+  base64Images: string[] = ['', '', '', ''];
   checkItemsPictureTaken: boolean[] = [false, false, false, false];
 
-  forkImageTaken: boolean = false;
+  forkImageTaken = false;
 
   constructor(private camera: Camera, public userService: UserService, public router: Router, private truckService: TruckService, private tutorialService: TutorialService, private alertController: AlertController) { }
 
@@ -28,7 +28,7 @@ export class PrecheckPage implements OnInit {
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
-    }
+    };
 
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
@@ -55,16 +55,16 @@ export class PrecheckPage implements OnInit {
 
   goToOrders() {
     if (this.user.manager) {
-      this.router.navigateByUrl("menu");
+      this.router.navigateByUrl('menu');
     } else {
-      this.router.navigateByUrl("orders");
+      this.router.navigateByUrl('orders');
     }
   }
 
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Daisy101',
-      cssClass: "scaledAlert",
+      cssClass: 'scaledAlert',
       message: '<img src="../../../assets/Daisy_Tutorial1.gif"/> <p>Now that you have confirmed your truck, please complete the truck pre-check in order to ensure that various features of the truck are in proper working order. </p>',
       buttons: ['OK']
     });

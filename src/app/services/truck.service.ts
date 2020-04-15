@@ -5,15 +5,15 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 export interface truck {
-  duration: number
-  name: string,
-  id: string
+  duration: number;
+  name: string;
+  id: string;
 }
 
 export interface truckTimeLog {
-  date: number,
-  duration: number,
-  driver: string
+  date: number;
+  duration: number;
+  driver: string;
 
 }
 
@@ -35,11 +35,11 @@ export class TruckService {
     this.truckCollection = db.collection<truck>('trucks');
   }
 
-  setTruckScanned(truckScanned: boolean){
+  setTruckScanned(truckScanned: boolean) {
     this.truckScanned = truckScanned;
   }
 
-  getTruckScanned(){
+  getTruckScanned() {
     return this.truckScanned;
   }
 
@@ -66,27 +66,27 @@ export class TruckService {
   addTruckLog(user: user, time: number) {
     if (user) {
       let truck: truck;
-      let id = this.getTruckId();
-      let driverName = user.firstname + " " + user.lastname;
+      const id = this.getTruckId();
+      const driverName = user.firstname + ' ' + user.lastname;
       // calculate time difference between login and logout
-      console.log("loginTime: " + this.loginTime);
-      let differenceMs = time - this.loginTime;
+      console.log('loginTime: ' + this.loginTime);
+      const differenceMs = time - this.loginTime;
       let differenceMins = Math.round(((differenceMs % 86400000) % 3600000) / 60000); // minutes
-      differenceMins == 0? differenceMins = 1:differenceMins=differenceMins;
+      differenceMins == 0 ? differenceMins = 1 : differenceMins = differenceMins;
 
-      let newTrucktimeLog: truckTimeLog = {
+      const newTrucktimeLog: truckTimeLog = {
         date: time,
         duration: differenceMins,
         driver: driverName
-      }
-      console.log("individual timelog: " + differenceMins);
+      };
+      console.log('individual timelog: ' + differenceMins);
 
       this.timelogCollection.add(newTrucktimeLog);
 
 
       this.getTruckData(id).subscribe(res => {
         truck = res;
-        let newDuration = truck.duration + differenceMins;
+        const newDuration = truck.duration + differenceMins;
         this.truckCollection.doc(id).update({ duration: newDuration });
       });
     }
@@ -106,8 +106,8 @@ export class TruckService {
     );
     return this.trucks;
   }
-  
-  getTruckLogs(id: string){
+
+  getTruckLogs(id: string) {
     this.timelogs = this.timelogCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -118,7 +118,7 @@ export class TruckService {
       })
 
     );
-    
+
     console.log(this.timelogs);
     return this.timelogs;
   }
@@ -126,6 +126,6 @@ export class TruckService {
 
   setLoginTime() {
     this.loginTime = new Date().getTime();
-    console.log("set logintime" + this.loginTime);
+    console.log('set logintime' + this.loginTime);
   }
 }
