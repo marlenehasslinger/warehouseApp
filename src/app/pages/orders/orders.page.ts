@@ -98,4 +98,38 @@ export class OrdersPage implements OnInit {
     await alert.present();
   }
 
+
+  async presentReportAlert() {
+    const alert = await this.alertController.create({
+      header: 'Report something',
+      cssClass: 'scaledAlert',
+      message: 'Please specify what you want to report',
+      inputs: [
+        {
+          name: 'name1',
+          type: 'text',
+          label: 'Problem description',
+          placeholder: 'Problem description'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
 }
