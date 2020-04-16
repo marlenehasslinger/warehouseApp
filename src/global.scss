@@ -47,3 +47,13 @@ ion-button {
 .scaledAlert {
     transform: scale(1.5);
 }
+
+.emergencyAlert {
+    transform: scale(1.5);
+    text-align: center;
+}
+
+.emergency {
+    color: red;
+    font-size: 40px;
+}

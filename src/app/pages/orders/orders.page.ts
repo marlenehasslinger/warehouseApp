@@ -15,8 +15,8 @@ import { AlertController } from '@ionic/angular';
 
 export class OrdersPage implements OnInit {
   @ViewChild('mySlider', null) slides: IonSlides;
-  listeningStarted:boolean;
-  listeningStopped:boolean;
+  listeningStarted: boolean;
+  listeningStopped: boolean;
   x: string;
   y: string;
   z: string;
@@ -46,18 +46,18 @@ export class OrdersPage implements OnInit {
     this.listeningStopped = this.accelerometerService.getListeningStopped();
 
     if (this.tutorialChecked) {
-      this.presentAlert();
+      this.presentTutorialAlert();
     }
 
   }
 
-  startListening(){
+  startListening() {
     this.accelerometerService.startListening();
     this.listeningStarted = true;
     this.listeningStopped = false;
   }
 
-  stopListening(){
+  stopListening() {
     this.listeningStarted = false;
     this.listeningStopped = true;
     this.accelerometerService.stopListening();
@@ -77,12 +77,22 @@ export class OrdersPage implements OnInit {
     console.log('should have logged out');
   }
 
-  async presentAlert() {
+  async presentTutorialAlert() {
     const alert = await this.alertController.create({
       header: 'Daisy101',
       cssClass: 'scaledAlert',
       message: '<h6>Starting the Truck</h6> <img src="../../../assets/Daisy_Tutorial2.gif"/> <p style="font-size:small;">Video courtesy of Nissan</p <p>Once you have confirmed that it is safe to drive your Rocla forklift, please confirm that the select lever is placed in neutral position and the parking brake is set, as shown above. Then, insert the key into the keyswitch and start the engine. You may view your tasks above, alongside the current map of AGVs.</p>',
       buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async presentEmergencyAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'emergencyAlert',
+      message: '<ion-icon class="emergency" name="ios-warning"></ion-icon> <h6>Are you having an emergency?</h6> <p>If you do not select an option, an emergency call will be made</p>',
+      buttons: ['Yes', 'No']
     });
 
     await alert.present();
