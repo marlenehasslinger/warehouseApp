@@ -94,7 +94,6 @@ export class UserService {
           return { id, ...data };
         });
       })
-
     );
 
     return this.searchResults;

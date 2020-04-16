@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TruckService, truck } from 'src/app/services/truck.service';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { AlertController } from '@ionic/angular';
 
@@ -18,7 +17,7 @@ export class TrucklogPage implements OnInit {
   sampleArr = [];
   resultArr = [];
 
-  constructor(private truckService: TruckService, private router: Router, public fs: AngularFirestore, private tutorialService: TutorialService, private alertController: AlertController) { }
+  constructor(private truckService: TruckService, private router: Router, private tutorialService: TutorialService, private alertController: AlertController) { }
 
   ngOnInit() {
     this.truckService.getAllTrucks().subscribe(res => {
@@ -50,14 +49,15 @@ export class TrucklogPage implements OnInit {
     }
 
     if (this.sampleArr.length == 0) {
-      this.fs.collection('trucks', ref => ref.where('searchIndex', '==', firstLetter)).snapshotChanges()
+      this.truckService.getTrucksWithFirstLetter(firstLetter)
         .subscribe(data => {
           data.forEach(childData => {
-            this.sampleArr.push(childData.payload.doc.data());
-            this.resultArr.push(childData.payload.doc.data());
+            this.sampleArr.push(childData);
+            this.resultArr.push(childData);
           });
         });
     }
+
     this.resultArr = [];
     this.sampleArr.forEach(val => {
       const name: string = val.name;

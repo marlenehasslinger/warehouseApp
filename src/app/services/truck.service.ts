@@ -29,7 +29,8 @@ export class TruckService {
   private truck: truck;
   private timelogs: Observable<truckTimeLog[]>;
   private truckScanned: boolean;
-
+  // For search bar functionality
+  private searchResults: Observable<any[]>;
 
   constructor(private db: AngularFirestore) {
     this.truckCollection = db.collection<truck>('trucks');
@@ -54,6 +55,10 @@ export class TruckService {
 
   getTruckId() {
     return this.truck.id;
+  }
+
+  getSearchResults(): any {
+    return this.searchResults;
   }
 
   getTruckData(id: string) {
@@ -83,7 +88,6 @@ export class TruckService {
 
       this.timelogCollection.add(newTrucktimeLog);
 
-
       this.getTruckData(id).subscribe(res => {
         truck = res;
         const newDuration = truck.duration + differenceMins;
@@ -105,6 +109,20 @@ export class TruckService {
 
     );
     return this.trucks;
+  }
+
+  getTrucksWithFirstLetter(firstLetter: string) {
+    this.searchResults = this.db.collection('trucks', ref => ref.where('searchIndex', '==', firstLetter)).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data:any = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+
+    return this.searchResults;
   }
 
   getTruckLogs(id: string) {
