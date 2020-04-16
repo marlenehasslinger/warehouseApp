@@ -30,6 +30,8 @@ export class UserService {
   private timelogs: Observable<timeLog[]>;
   private loginTime: number;
   private users: Observable<user[]>;
+  // For search bar functionality
+  private searchResults: Observable<any[]>;
 
   constructor(private db: AngularFirestore, public truckService: TruckService, public afAuth: AngularFireAuth) {
     this.userCollection = db.collection<user>('users');
@@ -51,6 +53,10 @@ export class UserService {
 
   getUser(): user {
     return this.user;
+  }
+
+  getSearchResults(): any {
+    return this.searchResults;
   }
 
   getUserData(id: string) {
@@ -79,6 +85,21 @@ export class UserService {
     return this.users;
   }
 
+  getUsersWithFirstLetter(firstLetter: string) {
+    this.searchResults = this.db.collection('users', ref => ref.where('searchIndex', '==', firstLetter)).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data:any = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+
+    );
+
+    return this.searchResults;
+  }
+
   // Time Logs
   getTimeLogs(id: string) {
     this.timelogs = this.timelogCollection.snapshotChanges().pipe(
@@ -99,18 +120,18 @@ export class UserService {
   addTimeLog(time: number) {
     // calculate time difference between login and logout
     if (this.loginTime) {
-    const differenceMs = time - this.loginTime;
-    console.log('logintime from user service: ' + this.loginTime);
-    let differenceMins = Math.round(((differenceMs % 86400000) % 3600000) / 60000); // minutes
-    differenceMins == 0 ? differenceMins = 1 : differenceMins = differenceMins;
+      const differenceMs = time - this.loginTime;
+      console.log('logintime from user service: ' + this.loginTime);
+      let differenceMins = Math.round(((differenceMs % 86400000) % 3600000) / 60000); // minutes
+      differenceMins == 0 ? differenceMins = 1 : differenceMins = differenceMins;
 
-    const newtimeLog: timeLog = {
-      truck: this.truckService.getTruck().name,
-      date: time,
-      duration: differenceMins
-    };
+      const newtimeLog: timeLog = {
+        truck: this.truckService.getTruck().name,
+        date: time,
+        duration: differenceMins
+      };
 
-    this.timelogCollection.add(newtimeLog);
+      this.timelogCollection.add(newtimeLog);
     }
   }
 

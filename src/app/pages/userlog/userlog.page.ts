@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService, user } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { AlertController } from '@ionic/angular';
 
@@ -19,7 +18,7 @@ export class UserlogPage implements OnInit {
   sampleArr = [];
   resultArr = [];
 
-  constructor(private userService: UserService, private router: Router, public fs: AngularFirestore, private tutorialService: TutorialService, private alertController: AlertController) { }
+  constructor(private userService: UserService, private router: Router, private tutorialService: TutorialService, private alertController: AlertController) { }
 
   ngOnInit() {
     this.userService.getAllUsers().subscribe(res => {
@@ -40,7 +39,7 @@ export class UserlogPage implements OnInit {
 
   search(event) {
     const searchKey: string = event.target.value;
-    const firstLetter = searchKey.toUpperCase();
+    const firstLetter: string = searchKey.toUpperCase();
 
     if (searchKey.length == 0) {
       this.searchClicked = false;
@@ -51,14 +50,15 @@ export class UserlogPage implements OnInit {
     }
 
     if (this.sampleArr.length == 0) {
-      this.fs.collection('users', ref => ref.where('searchIndex', '==', firstLetter)).snapshotChanges()
+      this.userService.getUsersWithFirstLetter(firstLetter)
         .subscribe(data => {
           data.forEach(childData => {
-            this.sampleArr.push(childData.payload.doc.data());
-            this.resultArr.push(childData.payload.doc.data());
+            this.sampleArr.push(childData);
+            this.resultArr.push(childData);
           });
         });
     }
+
     this.resultArr = [];
     this.sampleArr.forEach(val => {
       const name: string = val.firstname;

@@ -53,8 +53,6 @@ export class MenuPage implements OnInit {
   }
 
   logout() {
-    console.log('entered logout');
-
     if (!this.accelerometerService.getListeningStopped()) {
       this.accelerometerService.stopListening();
     }
@@ -64,7 +62,6 @@ export class MenuPage implements OnInit {
     if (this.truckService.getTruckScanned) {
       this.truckService.addTruckLog(this.userService.getUser(), new Date().getTime());
     }
-    console.log('should have logged out');
   }
 
 }
