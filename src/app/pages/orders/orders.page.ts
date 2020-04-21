@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -31,6 +31,17 @@ export class OrdersPage implements OnInit {
   alpha: number;
   startingIndex: number;
   tutorialChecked: boolean;
+
+  /** Stop hardware back button */
+  @HostListener('document:ionBackButton', ['$event'])
+  overrideHardwareBackAction(event: any) {
+    console.log('back button');
+    event.detail.register(100, async () => {
+      event.stopImmediatePropagation();
+      event.stopPropagation();
+      event.preventDefault();
+    });
+  }
 
   swipeNext() {
     this.slides.slideNext();
