@@ -82,7 +82,7 @@ export class AccelerometerService {
       // Write the data to the influxDB in a batch style with 100 records. We can also set the limit higher such as 200 or more.
       // If the sampling period is 50ms, we send the data to influxdb every 5 second.
       // issaveData is a flag to indicate if we want to send the data to influxDB or now.
-      if (this.startingIndex >= 5) {
+      if (this.startingIndex >= 50) {
         // We need send the data in plain text .
         this.http.setHeader('*', 'Content-Type', 'plain/text');
         this.http.setDataSerializer('utf8');
