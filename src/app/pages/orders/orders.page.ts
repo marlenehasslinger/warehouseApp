@@ -82,7 +82,7 @@ export class OrdersPage implements OnInit {
     console.log('entered logout');
     this.router.navigateByUrl('login');
     this.userService.addTimeLog(new Date().getTime());
-    if (this.truckService.getTruckScanned) {
+    if (this.truckService.getTruckScanned()) {
       this.truckService.addTruckLog(this.userService.getUser(), new Date().getTime());
     }
     console.log('should have logged out');

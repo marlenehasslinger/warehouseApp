@@ -28,7 +28,7 @@ export class TruckService {
   private timelogCollection: AngularFirestoreCollection<truckTimeLog>;
   private truck: truck;
   private timelogs: Observable<truckTimeLog[]>;
-  private truckScanned: boolean;
+  private truckScanned: boolean = false;
   // For search bar functionality
   private searchResults: Observable<any[]>;
 
@@ -74,7 +74,6 @@ export class TruckService {
       const id = this.getTruckId();
       const driverName = user.firstname + ' ' + user.lastname;
       // calculate time difference between login and logout
-      console.log('loginTime: ' + this.loginTime);
       const differenceMs = time - this.loginTime;
       let differenceMins = Math.round(((differenceMs % 86400000) % 3600000) / 60000); // minutes
       differenceMins == 0 ? differenceMins = 1 : differenceMins = differenceMins;
@@ -84,7 +83,7 @@ export class TruckService {
         duration: differenceMins,
         driver: driverName
       };
-      console.log('individual timelog: ' + differenceMins);
+      console.log('timelog in minutes: ' + differenceMins);
 
       this.timelogCollection.add(newTrucktimeLog);
 

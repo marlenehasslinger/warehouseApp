@@ -60,6 +60,7 @@ export class LoginPage implements OnInit {
           })
           this.truckService.setLoginTime();
           */
+          this.truckService.setTruckScanned(false);
           this.userService.setLoginTime();
           this.userService.getUserData(this.uid).subscribe(res => {
             this.userService.setUser(res);
@@ -72,24 +73,7 @@ export class LoginPage implements OnInit {
 
           });
         } else {
-          this.truckService.setTruckScanned(this.form.scanTruckChecked);
-          // delete
-          /*
-          this.truckService.getTruckData("truck1").subscribe(res => {
-            this.truckService.setTruck(res);
-          })
-          this.truckService.setLoginTime();
-
-          this.userService.setLoginTime();
-          this.userService.getUserData(this.uid).subscribe(res => {
-            this.userService.setUser(res);
-            this.tutorialService.setServiceChecked(this.form.tutorialChecked)
-            this.router.navigateByUrl("truckconfirmation");
-          });
-          */
-          // until here
           this.scanCode();
-
         }
       }
     } catch (err) {
@@ -109,6 +93,7 @@ export class LoginPage implements OnInit {
         this.scannedCode = barcodeData.text;
         if (!barcodeData.cancelled) {
           this.truckService.getTruckData(this.scannedCode).subscribe(res => {
+            this.truckService.setTruckScanned(true);
             this.truckService.setTruck(res);
           });
           loading.dismiss();

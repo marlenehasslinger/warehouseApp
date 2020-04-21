@@ -120,12 +120,16 @@ export class UserService {
     // calculate time difference between login and logout
     if (this.loginTime) {
       const differenceMs = time - this.loginTime;
-      console.log('logintime from user service: ' + this.loginTime);
       let differenceMins = Math.round(((differenceMs % 86400000) % 3600000) / 60000); // minutes
       differenceMins == 0 ? differenceMins = 1 : differenceMins = differenceMins;
+      let truckName = '';
+
+      if(this.truckService.getTruckScanned()){
+        truckName = this.truckService.getTruck().name;
+      }
 
       const newtimeLog: timeLog = {
-        truck: this.truckService.getTruck().name,
+        truck: truckName,
         date: time,
         duration: differenceMins
       };
