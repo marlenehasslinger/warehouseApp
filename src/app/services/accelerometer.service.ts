@@ -57,7 +57,6 @@ export class AccelerometerService {
     };
 
     this.startingIndex = 0;
-    console.log('Starting index: ' + this.startingIndex);
     this.id = this.deviceMotion.watchAcceleration(option).subscribe((acceleration: DeviceMotionAccelerationData) => {
 
       // Use low pass filter to get the value of gravity in 3 axises and remove them from the value.
@@ -88,10 +87,10 @@ export class AccelerometerService {
         this.http.setHeader('*', 'Content-Type', 'plain/text');
         this.http.setDataSerializer('utf8');
 
-        console.log('Sending data: ' + Date.now());
+        //console.log('Sending data: ' + Date.now());
         this.http.post(url, this.outputData, headers)
           .then(() => {
-            console.log('Finish sending data: ' + Date.now());
+            //console.log('Finish sending data: ' + Date.now());
           })
           .catch(error => {
             console.log(error);
@@ -115,10 +114,10 @@ export class AccelerometerService {
     if (this.outputData) {
       this.http.setHeader('*', 'Content-Type', 'plain/text');
       this.http.setDataSerializer('utf8');
-      console.log('Sending data: ' + Date.now());
+      //console.log('Sending data: ' + Date.now());
       this.http.post(url, this.outputData, headers)
         .then(() => {
-          console.log('Finish sending data: ' + Date.now())
+          //console.log('Finish sending data: ' + Date.now())
           this.startingIndex = 0;
           this.outputData = '';
         })
