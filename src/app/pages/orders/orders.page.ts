@@ -31,6 +31,8 @@ export class OrdersPage implements OnInit {
   alpha: number;
   startingIndex: number;
   tutorialChecked: boolean;
+  selfDefinedThreshold: number; 
+  selfDefinedInterval: number;
 
   /** Stop hardware back button */
   @HostListener('document:ionBackButton', ['$event'])
@@ -48,7 +50,8 @@ export class OrdersPage implements OnInit {
   }
 
   constructor(private accelerometerService: AccelerometerService, private router: Router, private userService: UserService, private truckService: TruckService, private tutorialService: TutorialService, private alertController: AlertController) {
-
+    this.selfDefinedInterval = 0.3;
+    this.selfDefinedThreshold = 10;
   }
 
   ngOnInit() {
@@ -63,9 +66,9 @@ export class OrdersPage implements OnInit {
   }
 
   startListening() {
-    this.accelerometerService.startListening();
     this.listeningStarted = true;
     this.listeningStopped = false;
+    this.accelerometerService.startListening(this.selfDefinedThreshold, this.selfDefinedInterval);
   }
 
   stopListening() {
@@ -96,6 +99,17 @@ export class OrdersPage implements OnInit {
 
     await alert.present();
   }
+
+  async presentCollisionAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'emergencyAlert',
+      message: 'Collision!!!'
+      //buttons: ['Yes', 'No']
+    });
+
+    await alert.present();
+  }
+
 
   async presentEmergencyAlert() {
     const alert = await this.alertController.create({

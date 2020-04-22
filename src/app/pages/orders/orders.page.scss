@@ -20,16 +20,20 @@ ion-button {
     font-size: 20px;
     --padding-bottom: 10px;
     --padding-top: 10px;
-    margin-left: 15px;
     margin-right: 15px;
+    width: 100%;
 }
 
 .container {
     text-align: center;
 }
 
-.special-button {
-    width: 45%;
+.inputfield {
+    font-size: 20px;
+    margin-right: 15px;
+    background-color: white;
+    --background: white;
+    --color: black;
 }
 
 img{
@@ -69,6 +73,14 @@ ion-icon {
     //margin-top: 10%;
 }
 
-.listening {
-    margin-top: 20px;
+ion-grid {
+    padding-bottom: 0;
+}
+
+ion-col {
+    margin-bottom: 0;
+}
+
+.special-button {
+    width: 45%;
 }

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { DeviceMotion, DeviceMotionAccelerationData, DeviceMotionAccelerometerOptions } from '@ionic-native/device-motion/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
+import CBuffer from 'cbuffer' // A package for circular buffer. To install it, simply use 'npm install CBuffer --save'
+import { ReplaySubject, Observable } from 'rxjs';
 
 const headers = { 'Authorization': 'Token AML0PF2bP6vI49uSsEPA01cj7QEsA5D2M2WHB_sW9iRyVENNqwjquofPeqHcjLJLHusYABT43TldbTW1ecc68g==' };
 const url = 'https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/write?org=1d952de0da8a8fe4&bucket=Rocla&precision=ms';
-
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,7 @@ export class AccelerometerService {
   gra_z: number;
   alpha: number;
   startingIndex: number;
+  startingTime: number;
 
   constructor(public deviceMotion: DeviceMotion, private http: HTTP) {
     this.x = '-';
@@ -44,9 +46,16 @@ export class AccelerometerService {
 
   }
 
-  async startListening() {
+  async startListening(definedTreshold: number, definedInterval: number) {
     this.listeningStarted = true;
     this.listeningStopped = false;
+    this.startingTime =  Date.now();
+
+    const intervalWindow = Math.floor(definedInterval / 0.05);
+
+    const x_Buffer = new CBuffer(intervalWindow);
+    const y_Buffer = new CBuffer(intervalWindow);
+    const z_Buffer = new CBuffer(intervalWindow);
 
     console.log('-----------BEGIN LISTENING-----------');
     var option: DeviceMotionAccelerometerOptions = {
@@ -69,6 +78,19 @@ export class AccelerometerService {
       this.y = '' + (acceleration.y - this.gra_y).toFixed(4);
       this.z = '' + (acceleration.z - this.gra_z).toFixed(4);
       this.timestamp = acceleration.timestamp.toFixed(0);
+
+      // Filling the circular buffer (first-in-first-out)
+      x_Buffer.push(Math.abs(parseFloat(this.x)));
+      y_Buffer.push(Math.abs(parseFloat(this.y)));
+      z_Buffer.push(Math.abs(parseFloat(this.z)));
+
+      if(Math.min.apply(
+        Math, x_Buffer.toArray())>definedTreshold ||
+        Math.min.apply(Math, y_Buffer.toArray())>definedTreshold ||
+        Math.min.apply(Math, z_Buffer.toArray())>definedTreshold) {
+        console.log('Collision detected! Threshold: '+definedTreshold+' Acceleration: '+'x='+this.x+',y='+this.y+',z='+this.z+' '+this.timestamp+'\n');
+        return "Hallo";
+      }
 
       // One sample of the acceleration data to be sent to the influxdb. It follows the InfluxDB line protocol syntax:
       // https://docs.influxdata.com/influxdb/v1.7/write_protocols/line_protocol_tutorial/
@@ -93,7 +115,7 @@ export class AccelerometerService {
             //console.log('Finish sending data: ' + Date.now());
           })
           .catch(error => {
-            console.log(error);
+            //console.log(error);
           })
         // Reset the index and buffer.
         this.startingIndex = 0
