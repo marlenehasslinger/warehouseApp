@@ -57,11 +57,12 @@ export class MenuPage implements OnInit {
       this.accelerometerService.stopListening();
     }
 
-    this.router.navigateByUrl('login');
     this.userService.addTimeLog(new Date().getTime());
     if (this.truckService.getTruckScanned) {
       this.truckService.addTruckLog(this.userService.getUser(), new Date().getTime());
     }
+    this.userService.signOut();
+    this.router.navigateByUrl('login');
   }
 
 }

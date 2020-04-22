@@ -75,17 +75,15 @@ export class OrdersPage implements OnInit {
   }
 
   logout() {
-    console.log('entered logout');
     if (!this.listeningStopped) {
       this.accelerometerService.stopListening();
     }
-    console.log('entered logout');
-    this.router.navigateByUrl('login');
     this.userService.addTimeLog(new Date().getTime());
     if (this.truckService.getTruckScanned()) {
       this.truckService.addTruckLog(this.userService.getUser(), new Date().getTime());
     }
-    console.log('should have logged out');
+    this.userService.signOut();
+    this.router.navigateByUrl('login');
   }
 
   async presentTutorialAlert() {

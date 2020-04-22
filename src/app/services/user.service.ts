@@ -142,4 +142,12 @@ export class UserService {
     this.loginTime = new Date().getTime();
   }
 
+  signOut() {
+    this.afAuth.auth.signOut().then(function() {
+      console.log("User successfully logged out.")
+    }).catch(function(error) {
+      console.log(error)
+    });
+  }
+
 }
