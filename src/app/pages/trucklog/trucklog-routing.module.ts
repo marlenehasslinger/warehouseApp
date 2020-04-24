@@ -19,6 +19,14 @@ const routes: Routes = [
   {
     path: 'truckoverview/:truck',
     loadChildren: () => import('./truckoverview/truckoverview.module').then( m => m.TruckoverviewPageModule)
+  },
+  {
+    path: 'truckdefects/:truck',
+    loadChildren: () => import('./truckdefects/truckdefects.module').then( m => m.TruckdefectsPageModule)
+  },
+  {
+    path: 'truckdefects',
+    loadChildren: () => import('./truckdefects/truckdefects.module').then( m => m.TruckdefectsPageModule)
   }
 ];
 

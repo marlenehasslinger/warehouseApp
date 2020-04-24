@@ -29,4 +29,10 @@ export class TruckoverviewPage implements OnInit {
 
   }
 
+  navigateToTruckDefects() {
+    console.log('uid from trucklog: ' + this.truck.id);
+    this.router.navigate(['/menu/trucklog/truckdefects/', this.truck.id]);
+
+  }
+
 }

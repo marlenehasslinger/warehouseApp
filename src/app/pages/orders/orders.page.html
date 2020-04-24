@@ -13,21 +13,30 @@
 
   <ion-grid>
     <ion-row>
+
       <ion-col size="6">
-        <ion-input placeholder="Threshold in m/s^2" type="number" [(ngModel)]="selfDefinedThreshold"
-          id="selfDefinedThreshold" class="inputfield"></ion-input>
+        <ion-item class="data-item">
+          <ion-label position="stacked">Threshold (m/s^2)</ion-label>
+          <ion-input type="number" [(ngModel)]="selfDefinedThreshold" id="selfDefinedThreshold"></ion-input>
+        </ion-item>
       </ion-col>
+
+
       <ion-col size="6">
-        <ion-input placeholder="Interval in s" type="number" [(ngModel)]="selfDefinedInterval" id="selfDefinedInterval"
-          class="inputfield"></ion-input>
+        <ion-item class="data-item">
+          <ion-label position="stacked">Interval (s)</ion-label>
+          <ion-input type="number" [(ngModel)]="selfDefinedInterval" id="selfDefinedInterval"></ion-input>
+        </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="6">
-        <ion-button (click)="startListening()" color="medium" [disabled]="listeningStarted" expand="default">Start Listening</ion-button>
+        <ion-button (click)="startListening()" color="medium" [disabled]="listeningStarted" expand="default" class="no-padding">Start
+          Listening</ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button (click)="stopListening()" color="medium" [disabled]="listeningStopped" expand="default">Stop Listening</ion-button>
+        <ion-button (click)="stopListening()" color="medium" [disabled]="listeningStopped" expand="default" class="no-padding">Stop
+          Listening</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -244,7 +253,7 @@
     </ion-slide>
   </ion-slides>
 
-  <ion-button expand="block" (click)="swipeNext()">Done</ion-button>
+  <ion-button expand="block" (click)="swipeNext()" class="no-padding">Done</ion-button>
   <div class="container">
     <img src="../../../assets/WarehouseMap_new.gif" />
     <ion-button class="special-button" (click)="presentEmergencyAlert()" color="danger" expand="default">Emergency

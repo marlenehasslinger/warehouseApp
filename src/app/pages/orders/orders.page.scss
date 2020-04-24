@@ -20,7 +20,7 @@ ion-button {
     font-size: 20px;
     --padding-bottom: 10px;
     --padding-top: 10px;
-    margin-right: 15px;
+    margin-left: 15px;
     width: 100%;
 }
 
@@ -83,4 +83,16 @@ ion-col {
 
 .special-button {
     width: 45%;
+}
+
+ion-label {
+    font-size: 18px;
+}
+
+.data-item {
+    --background: white;
+}
+
+.no-padding {
+    margin-left: 0;
 }

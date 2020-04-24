@@ -89,7 +89,6 @@ export class AccelerometerService {
         Math.min.apply(Math, y_Buffer.toArray())>definedTreshold ||
         Math.min.apply(Math, z_Buffer.toArray())>definedTreshold) {
         console.log('Collision detected! Threshold: '+definedTreshold+' Acceleration: '+'x='+this.x+',y='+this.y+',z='+this.z+' '+this.timestamp+'\n');
-        return "Hallo";
       }
 
       // One sample of the acceleration data to be sent to the influxdb. It follows the InfluxDB line protocol syntax:
