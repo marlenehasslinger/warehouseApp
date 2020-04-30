@@ -58,7 +58,7 @@ export class MenuPage implements OnInit {
     }
 
     this.userService.addTimeLog(new Date().getTime());
-    if (this.truckService.getTruckScanned) {
+    if(this.truckService.getTruckScanned()) {
       this.truckService.addTruckLog(this.userService.getUser(), new Date().getTime());
     }
     this.userService.signOut();
