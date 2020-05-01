@@ -10,7 +10,6 @@ export class TutorialService {
 
   setServiceChecked(isChecked: boolean) {
     this.tutorialChecked = isChecked;
-    console.log('tutorial: ' + this.tutorialChecked);
   }
 
   getServiceChecked() {

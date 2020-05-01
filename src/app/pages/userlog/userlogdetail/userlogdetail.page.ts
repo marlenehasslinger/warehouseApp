@@ -16,16 +16,13 @@ export class UserlogdetailPage implements OnInit {
 
   ngOnInit() {
     const uid = this.route.snapshot.params.user;
-    console.log(uid);
 
     this.userService.getUserData(uid).subscribe(res => {
       this.driver = res;
-      console.log(this.driver);
     });
 
     this.userService.getTimeLogs(uid).subscribe(res => {
       this.timeLogs = res;
-      console.log(this.timeLogs);
     });
   }
 

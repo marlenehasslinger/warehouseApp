@@ -111,10 +111,10 @@ export class AccelerometerService {
         //console.log('Sending data: ' + Date.now());
         this.http.post(url, this.outputData, headers)
           .then(() => {
-            //console.log('Finish sending data: ' + Date.now());
+            console.log('Finish sending data: ' + Date.now());
           })
           .catch(error => {
-            //console.log(error);
+            console.log(error);
           })
         // Reset the index and buffer.
         this.startingIndex = 0
@@ -135,10 +135,9 @@ export class AccelerometerService {
     if (this.outputData) {
       this.http.setHeader('*', 'Content-Type', 'plain/text');
       this.http.setDataSerializer('utf8');
-      //console.log('Sending data: ' + Date.now());
       this.http.post(url, this.outputData, headers)
         .then(() => {
-          //console.log('Finish sending data: ' + Date.now())
+          console.log('Finish sending data: ' + Date.now())
           this.startingIndex = 0;
           this.outputData = '';
         })

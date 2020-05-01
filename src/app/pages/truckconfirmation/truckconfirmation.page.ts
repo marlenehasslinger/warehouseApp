@@ -26,7 +26,6 @@ export class TruckconfirmationPage implements OnInit {
       this.presentAlert();
     }
 
-    console.log(this.truck);
   }
 
 

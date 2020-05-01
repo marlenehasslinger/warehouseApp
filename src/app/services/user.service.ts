@@ -112,7 +112,6 @@ export class UserService {
 
     );
 
-    console.log(this.timelogs);
     return this.timelogs;
   }
 

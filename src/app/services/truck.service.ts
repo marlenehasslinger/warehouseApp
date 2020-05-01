@@ -83,7 +83,6 @@ export class TruckService {
         duration: differenceMins,
         driver: driverName
       };
-      console.log('timelog in minutes: ' + differenceMins);
 
       this.timelogCollection.add(newTrucktimeLog);
 
@@ -136,13 +135,11 @@ export class TruckService {
 
     );
 
-    console.log(this.timelogs);
     return this.timelogs;
   }
 
 
   setLoginTime() {
     this.loginTime = new Date().getTime();
-    console.log('set logintime' + this.loginTime);
   }
 }

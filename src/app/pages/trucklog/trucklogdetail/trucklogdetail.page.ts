@@ -15,16 +15,13 @@ export class TrucklogdetailPage implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.params.truck;
-    console.log(id);
 
     this.truckService.getTruckData(id).subscribe(res => {
       this.truck = res;
-      console.log(this.truck);
     });
 
     this.truckService.getTruckLogs(id).subscribe(res => {
       this.timeLogs = res;
-      console.log(this.timeLogs);
     });
   }
 

@@ -15,7 +15,6 @@ export class TruckoverviewPage implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.params.truck;
-    console.log(id);
 
     this.truckService.getTruckData(id).subscribe(res => {
       this.truck = res;
@@ -24,13 +23,11 @@ export class TruckoverviewPage implements OnInit {
   }
 
   navigateToTruckDetail() {
-    console.log('uid from trucklog: ' + this.truck.id);
     this.router.navigate(['/menu/trucklog/trucklogdetail/', this.truck.id]);
 
   }
 
   navigateToTruckDefects() {
-    console.log('uid from trucklog: ' + this.truck.id);
     this.router.navigate(['/menu/trucklog/truckdefects/', this.truck.id]);
 
   }

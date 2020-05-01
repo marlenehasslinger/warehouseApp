@@ -45,7 +45,6 @@ export class PrecheckPage implements OnInit {
     this.user = this.userService.getUser();
     this.truck = this.truckService.getTruck();
     this.tutorialChecked = this.tutorialService.getServiceChecked();
-    console.log(this.truck);
 
     if (this.tutorialChecked) {
       this.presentAlert();

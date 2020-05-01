@@ -37,7 +37,7 @@ export class OrdersPage implements OnInit {
   /** Stop hardware back button */
   @HostListener('document:ionBackButton', ['$event'])
   overrideHardwareBackAction(event: any) {
-    console.log('back button');
+    console.log('back button was clicked');
     event.detail.register(100, async () => {
       event.stopImmediatePropagation();
       event.stopPropagation();
