@@ -28,7 +28,6 @@ export class TruckconfirmationPage implements OnInit {
 
   }
 
-
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Daisy101',

@@ -100,17 +100,6 @@ export class OrdersPage implements OnInit {
     await alert.present();
   }
 
-  async presentCollisionAlert() {
-    const alert = await this.alertController.create({
-      cssClass: 'emergencyAlert',
-      message: 'Collision!!!'
-      //buttons: ['Yes', 'No']
-    });
-
-    await alert.present();
-  }
-
-
   async presentEmergencyAlert() {
     const alert = await this.alertController.create({
       cssClass: 'emergencyAlert',

@@ -3,6 +3,7 @@ import { DeviceMotion, DeviceMotionAccelerationData, DeviceMotionAccelerometerOp
 import { HTTP } from '@ionic-native/http/ngx';
 import CBuffer from 'cbuffer' // A package for circular buffer. To install it, simply use 'npm install CBuffer --save'
 import { ReplaySubject, Observable } from 'rxjs';
+import { AlertController } from '@ionic/angular';
 
 const headers = { 'Authorization': 'Token AML0PF2bP6vI49uSsEPA01cj7QEsA5D2M2WHB_sW9iRyVENNqwjquofPeqHcjLJLHusYABT43TldbTW1ecc68g==' };
 const url = 'https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/write?org=1d952de0da8a8fe4&bucket=Rocla&precision=ms';
@@ -10,6 +11,7 @@ const url = 'https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/write?org=1
 @Injectable({
   providedIn: 'root'
 })
+
 export class AccelerometerService {
 
   listeningStarted: boolean;
@@ -29,7 +31,7 @@ export class AccelerometerService {
   startingIndex: number;
   startingTime: number;
 
-  constructor(public deviceMotion: DeviceMotion, private http: HTTP) {
+  constructor(public deviceMotion: DeviceMotion, private http: HTTP,  private alertController: AlertController) {
     this.x = '-';
     this.y = '-';
     this.z = '-';
@@ -44,6 +46,16 @@ export class AccelerometerService {
     // Measurement is an important concept in InfluxDB. It can be considered as the table name.
     this.measurement = 'acceleration';
 
+  }
+
+  async presentCollisionAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'emergencyAlert',
+      message: '<ion-icon class="emergency" name="ios-warning"></ion-icon> <h6>Collision!</h6> <p>Are you OK?</p>',
+      buttons: ['Yes', 'No']
+    });
+
+    await alert.present();
   }
 
   async startListening(definedTreshold: number, definedInterval: number) {
@@ -88,7 +100,8 @@ export class AccelerometerService {
         Math, x_Buffer.toArray())>definedTreshold ||
         Math.min.apply(Math, y_Buffer.toArray())>definedTreshold ||
         Math.min.apply(Math, z_Buffer.toArray())>definedTreshold) {
-        console.log('Collision detected! Threshold: '+definedTreshold+' Acceleration: '+'x='+this.x+',y='+this.y+',z='+this.z+' '+this.timestamp+'\n');
+          console.log('Collision detected - Threshold: '+definedTreshold+' Acceleration: '+'x='+this.x+',y='+this.y+',z='+this.z+' '+this.timestamp+'\n');
+          this.presentCollisionAlert();
       }
 
       // One sample of the acceleration data to be sent to the influxdb. It follows the InfluxDB line protocol syntax:
